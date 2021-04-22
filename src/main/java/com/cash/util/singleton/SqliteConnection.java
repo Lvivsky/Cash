@@ -17,14 +17,10 @@ public class SqliteConnection {
     private static String username;
     private static String password;
 
-    private SqliteConnection(String _url) {
-        url = "jdbc:sqlite:"+_url;
-    }
-
-
-    public static SqliteConnection getInstance(String url) {
+    private SqliteConnection() { }
+    public static SqliteConnection getInstance() {
         if (instance == null)
-            instance = new SqliteConnection(url);
+            instance = new SqliteConnection();
         return instance;
     }
 
@@ -36,7 +32,11 @@ public class SqliteConnection {
         return sqLiteDataSource.getConnection();
     }
 
+    public static void clear() {
+        instance = null;
+    }
+
     public static String getUrl() { return url; }
-    public static void setUrl(String _url) { url = "jdbc:sqlite:"+_url; }
+    public void setUrl(String _url) { url = "jdbc:sqlite:"+_url; }
 
 }

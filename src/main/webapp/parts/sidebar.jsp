@@ -5,14 +5,14 @@
         <ul class="sidebar-menu">
 
             <li class="active">
-                <a class="" href="/account">
+                <a class="" href="#">
                     <i class="icon_house_alt"></i>
                     <span>Головна</span>
                 </a>
             </li>
 
             <li class="">
-                <a class="" href="#">
+                <a class="" href="/account">
                     <i class="icon_document_alt"></i>
                     <span>Рахунки</span>
                 </a>

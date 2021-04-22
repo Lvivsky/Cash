@@ -6,6 +6,7 @@ import lombok.extern.log4j.Log4j;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Objects;
 
 @Data
@@ -17,7 +18,7 @@ public class DbController {
     private static String currentDatabase;
 
 
-    private DbController() {}
+    private DbController() { }
     public static DbController getInstance() {
         if (!Objects.isNull(instance))
             return instance;
@@ -25,6 +26,27 @@ public class DbController {
         return new DbController();
     }
     // ------------------------------
+    public void setDefault() {
+        currentDatabase = "/Users/a1/Documents/api/cash/db/temp.cash";
+    }
+
+    public static void clean() {
+        instance = null;
+    }
+
+    public void create() throws IOException {
+        log.info("Create new empty template");
+
+        Files.copy(
+                new File(EMPTY_DATABASE).toPath(),
+                new File(currentDatabase).toPath());
+        log.info("Template created successfully");
+    }
+
+    public void remove() throws IOException {
+        Files.deleteIfExists(new File(currentDatabase).toPath());
+        log.info("Deleted: " + currentDatabase);
+    }
 
     // for creating empty database
     public void createEmptyTemplate() {
@@ -48,7 +70,6 @@ public class DbController {
             try {
                 log.info("Removing database: " + currentDatabase);
                 return Files.deleteIfExists(new File(currentDatabase).toPath());
-
             } catch (IOException e) {
                 log.error("Error removing database: " + e.getMessage());
                 return false;

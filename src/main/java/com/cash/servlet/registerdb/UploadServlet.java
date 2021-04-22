@@ -40,13 +40,15 @@ public class UploadServlet extends HttpServlet {
         DbController dbController = DbController.getInstance();
         dbController.setCurrentDatabase("/Users/a1/Documents/api/cash/db/" + fileName);
 
-        dbController.removeTemplate();
-
         for (Part part : req.getParts()) {
             part.write("/Users/a1/Documents/api/cash/db/" + fileName);
         }
 
-        SqliteConnection.getInstance(dbController.getDbFileAbsolutePath());
+
+
+        SqliteConnection sq = SqliteConnection.getInstance();
+        sq.setUrl(dbController.getDbFileAbsolutePath());
+
 
         log.info("Database uploaded: " + dbController.getDbFileAbsolutePath());
         resp.sendRedirect(req.getContextPath() + "/account");

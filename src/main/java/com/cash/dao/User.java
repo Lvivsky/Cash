@@ -1,9 +1,12 @@
 package com.cash.dao;
 
+import com.cash.util.RandomIdGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+
+import java.util.UUID;
 
 @Data
 @AllArgsConstructor
@@ -14,7 +17,14 @@ public class User {
     private Integer id;
     private String guid;
     private String changed;
-    private String delete;
+    private String deleted;
     private String login;
 
+    public User(String changed, String deleted, String login) {
+        this.id = RandomIdGenerator.getRandomID();
+        this.guid = UUID.randomUUID().toString();
+        this.changed = changed;
+        this.deleted = deleted;
+        this.login = login;
+    }
 }

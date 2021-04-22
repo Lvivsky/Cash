@@ -1,6 +1,7 @@
 package com.cash.servlet.filter;
 
 import com.cash.util.singleton.DbController;
+import com.cash.util.singleton.SqliteConnection;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j;
 
@@ -25,6 +26,9 @@ public class IndexFilter implements Filter {
 
         DbController dbController = DbController.getInstance();
         dbController.removeTemplate();
+        DbController.clean();
+
+        SqliteConnection.clear();
 
         filterChain.doFilter(servletRequest, servletResponse);
     }

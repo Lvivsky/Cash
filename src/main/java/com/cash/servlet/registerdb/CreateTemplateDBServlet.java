@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 @Log4j
 @WebServlet("/generate-template-database")
 public class CreateTemplateDBServlet extends HttpServlet {
+
     private static UserService userService;
 
     @Override
@@ -37,16 +38,12 @@ public class CreateTemplateDBServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
 
         DbController dbController = DbController.getInstance();
-        dbController.setCurrentDatabase("/Users/a1/Documents/api/cash/db/template.cash");
-
-        // create new empty database
-        dbController.createEmptyTemplate();
+        dbController.setDefault();
+        dbController.create();
 
         // set connection with database
-        SqliteConnection.getInstance(dbController.getDbFileAbsolutePath());
-
-        User user = userService.getUserById(1);
-        log.info("Get empty database with user: " + user.toString());
+        SqliteConnection sq = SqliteConnection.getInstance();
+        sq.setUrl(dbController.getDbFileAbsolutePath());
 
         resp.sendRedirect(req.getContextPath() + "/account");
     }
