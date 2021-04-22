@@ -22,10 +22,6 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         req.setCharacterEncoding("UTF-8");
-
-
-
-
         req.getRequestDispatcher("user.jsp").forward(req,resp);
     }
 

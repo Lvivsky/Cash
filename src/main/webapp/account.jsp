@@ -59,45 +59,33 @@
                 </div>
             </div>
 
-
-
-
-
-
-
             <div class="row">
                 <div class="col-lg-12">
                     <section class="panel">
-                        <header class="panel-heading">
-                            Advanced Table
-                        </header>
-
                         <table class="table table-striped table-advance table-hover">
                             <tbody>
                             <tr>
-                                <th><i class="icon_profile"></i> Назва рахунку</th>
-                                <th><i class="icon_calendar"></i> Залишок</th>
-                                <th><i class="icon_mail_alt"></i> Валюта</th>
-                                <th><i class="icon_pin_alt"></i> Примітка</th>
+                                <th><i class="icon_book"></i> Назва рахунку</th>
+                                <th><i class="icon_calculator_alt"></i> Залишок</th>
+                                <th><i class="icon_currency"></i> Валюта</th>
+                                <th><i class="icon_comment"></i> Примітка</th>
                                 <th><i class="icon_cogs"></i> Action</th>
                             </tr>
                             <c:forEach items="${accounts}" var="e">
-                            <tr>
-                                <td>${e.name}</td>
-                                <td>${e.startingBalance}</td>
-                                <td>${e.currency}</td>
-                                <td>${e.comment}</td>
-                                <td>
-                                    <div class="btn-group">
-                                        <a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a>
-                                        <a class="btn btn-success" href="#"><i class="icon_check_alt2"></i></a>
-                                        <a class="btn btn-danger" href="#"><i class="icon_close_alt2"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td>${e.name}</td>
+                                    <td>${e.startingBalance}</td>
+                                    <td>${e.currency}</td>
+                                    <td>${e.comment}</td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a>
+                                            <a class="btn btn-success" href="#"><i class="icon_check_alt2"></i></a>
+                                            <a class="btn btn-danger" href="#"><i class="icon_close_alt2"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
                             </c:forEach>
-
-
 
                             </tbody>
                         </table>

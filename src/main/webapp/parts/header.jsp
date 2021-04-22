@@ -208,8 +208,7 @@
                         </a>
                         <ul class="dropdown-menu extended logout">
                             <div class="log-arrow-up"></div>
-                            <li class="eborder-top"><a href="#"><i class="icon_profile"></i> Save </a></li>
-                            <li><a href="#"><i class="icon_mail_alt"></i> Save as</a></li>
+                            <li class="eborder-top"><a href="/save"><i class="icon_profile"></i> Save </a></li>
                             <li><a href="/remove-db"><i class="icon_clock_alt"></i> Out</a></li>
 <%--                            <li><a href="#"><i class="icon_chat_alt"></i> Chats</a></li>--%>
                         </ul>

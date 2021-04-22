@@ -39,6 +39,7 @@ public class CreateTemplateDBServlet extends HttpServlet {
 
         DbController dbController = DbController.getInstance();
         dbController.setDefault();
+        dbController.remove();
         dbController.create();
 
         // set connection with database
