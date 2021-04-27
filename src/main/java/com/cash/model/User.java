@@ -1,4 +1,4 @@
-package com.cash.dao;
+package com.cash.model;
 
 import com.cash.util.RandomIdGenerator;
 import lombok.AllArgsConstructor;

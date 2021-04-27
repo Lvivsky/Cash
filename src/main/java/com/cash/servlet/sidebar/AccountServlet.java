@@ -1,19 +1,14 @@
 package com.cash.servlet.sidebar;
 
-import com.cash.dao.Accounts;
 import com.cash.service.AccountsService;
-import com.cash.service.UserService;
-import com.cash.service.impl.AccountServiceImpl;
-import com.cash.service.impl.UserServiceImpl;
+import com.cash.service.AccountsServiceImpl;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 @Log4j
 @WebServlet("/account")
@@ -23,7 +18,7 @@ public class AccountServlet extends HttpServlet {
 
     @Override
     public void init() {
-        accountsService = new AccountServiceImpl();
+        accountsService = new AccountsServiceImpl();
     }
 
     @SneakyThrows

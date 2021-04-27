@@ -1,7 +1,6 @@
-package com.cash.service.impl;
+package com.cash.dao;
 
-import com.cash.dao.Accounts;
-import com.cash.service.AccountsService;
+import com.cash.model.Accounts;
 import com.cash.util.singleton.SqliteConnection;
 
 import java.sql.Connection;
@@ -11,10 +10,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AccountServiceImpl implements AccountsService {
+public class AccountsDaoImpl implements AccountsDao {
 
     @Override
-    public List<Accounts> getAllAccounts() throws SQLException, ClassNotFoundException {
+    public List<Accounts> getAll() throws SQLException, ClassNotFoundException {
         List<Accounts> accounts = new ArrayList<>();
         try (
                 Connection connection = SqliteConnection.getConnection();
@@ -43,4 +42,5 @@ public class AccountServiceImpl implements AccountsService {
             return accounts;
         }
     }
+
 }
