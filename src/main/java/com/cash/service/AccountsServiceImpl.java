@@ -23,10 +23,10 @@ public class AccountsServiceImpl implements AccountsService {
         try {
             return accountsDao.getAll();
         } catch (SQLException e) {
-            log.info("SQLException | " + e.getMessage());
+            log.error("SQLException | " + e.getMessage());
             return new ArrayList<>();
         } catch (ClassNotFoundException e) {
-            log.info("ClassNotFoundException | " + e.getMessage());
+            log.error("ClassNotFoundException | " + e.getMessage());
             return new ArrayList<>();
         }
     }

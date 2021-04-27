@@ -2,16 +2,10 @@ package com.cash.service;
 
 import com.cash.dao.UserDao;
 import com.cash.dao.UserDaoImpl;
-import com.cash.util.singleton.SqliteConnection;
 import com.cash.model.User;
-import com.cash.exception.UserNotFoundException;
-import com.cash.service.UserService;
-import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Log4j
 public class UserServiceImpl implements UserService {
@@ -40,9 +34,9 @@ public class UserServiceImpl implements UserService {
         try {
             userDao.edit(newUser);
         } catch (SQLException e) {
-            log.info("SQLException |" + e.getMessage());
+            log.error("SQLException |" + e.getMessage());
         } catch (ClassNotFoundException e) {
-            log.info("ClassNotFoundException | " + e.getMessage());
+            log.error("ClassNotFoundException | " + e.getMessage());
         }
     }
 

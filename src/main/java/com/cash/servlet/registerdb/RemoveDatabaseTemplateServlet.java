@@ -1,6 +1,6 @@
 package com.cash.servlet.registerdb;
 
-import com.cash.util.singleton.DbController;
+import com.cash.core.DbController;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j;
 

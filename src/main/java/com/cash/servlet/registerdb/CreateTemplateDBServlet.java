@@ -1,9 +1,9 @@
 package com.cash.servlet.registerdb;
 
-import com.cash.util.singleton.SqliteConnection;
+import com.cash.core.SqliteConnection;
 import com.cash.service.UserService;
 import com.cash.service.UserServiceImpl;
-import com.cash.util.singleton.DbController;
+import com.cash.core.DbController;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j;
 

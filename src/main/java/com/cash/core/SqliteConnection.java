@@ -1,4 +1,4 @@
-package com.cash.util.singleton;
+package com.cash.core;
 
 import lombok.Data;
 import lombok.ToString;

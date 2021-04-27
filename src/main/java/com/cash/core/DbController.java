@@ -1,4 +1,4 @@
-package com.cash.util.singleton;
+package com.cash.core;
 
 import lombok.Data;
 import lombok.extern.log4j.Log4j;
@@ -6,7 +6,6 @@ import lombok.extern.log4j.Log4j;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Objects;
 
 @Data

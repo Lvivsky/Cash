@@ -1,7 +1,7 @@
 package com.cash.dao;
 
 import com.cash.model.User;
-import com.cash.util.singleton.SqliteConnection;
+import com.cash.core.SqliteConnection;
 import lombok.extern.log4j.Log4j;
 
 import java.sql.Connection;

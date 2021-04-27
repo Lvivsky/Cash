@@ -1,7 +1,7 @@
 package com.cash.dao;
 
 import com.cash.model.Accounts;
-import com.cash.util.singleton.SqliteConnection;
+import com.cash.core.SqliteConnection;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
