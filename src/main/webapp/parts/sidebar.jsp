@@ -45,7 +45,7 @@
                 </a>
             </li>
             <li class="">
-                <a class="" href="#">
+                <a class="" href="/categories">
                     <i class="icon_documents_alt"></i>
                     <span>Статті</span>
                 </a>

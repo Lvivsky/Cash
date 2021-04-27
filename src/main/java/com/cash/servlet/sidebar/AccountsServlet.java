@@ -12,13 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 
 @Log4j
 @WebServlet("/account")
-public class AccountServlet extends HttpServlet {
+public class AccountsServlet extends HttpServlet {
 
     private AccountsService accountsService;
 
     @Override
     public void init() {
-        accountsService = new AccountsServiceImpl();
+        this.accountsService = new AccountsServiceImpl();
     }
 
     @SneakyThrows

@@ -100,8 +100,6 @@
 
             </div>
             <!--/.row-->
-
-
             <div class="row">
                 <div class="col-lg-9 col-md-12">
 
@@ -148,15 +146,8 @@
                         </li>
                     </ul>
                 </div>
-
-
             </div>
-
-
             <!-- Today status end -->
-
-
-
             <div class="row">
 
                 <div class="col-lg-9 col-md-12">
@@ -366,14 +357,7 @@
                 <!--/col-->
 
             </div>
-
-
-
             <!-- statics end -->
-
-
-
-
             <!-- project team & activity start -->
             <div class="row">
                 <div class="col-md-4 portlets">
@@ -597,7 +581,6 @@
                     <!--Project Activity end-->
                 </div>
             </div><br><br>
-
             <div class="row">
                 <div class="col-md-6 portlets">
                     <div class="panel panel-default">
