@@ -12,14 +12,20 @@ import java.util.List;
 
 public class AccountsDaoImpl implements AccountsDao {
 
+    private void close(Statement statement, Connection connection, ResultSet resultSet) throws SQLException {
+        statement.close();
+        connection.close();
+        resultSet.close();
+    }
+
     @Override
     public List<Accounts> getAll() throws SQLException, ClassNotFoundException {
         List<Accounts> accounts = new ArrayList<>();
         try (
                 Connection connection = SqliteConnection.getConnection();
                 Statement statement = connection.createStatement();
-                ResultSet resultSet = statement.executeQuery("SELECT * FROM Accounts"))
-        {
+                ResultSet resultSet = statement.executeQuery("SELECT * FROM Accounts")
+        ) {
             while (resultSet.next())
             {
                 accounts.add(
@@ -36,9 +42,7 @@ public class AccountsDaoImpl implements AccountsDao {
                         )
                 );
             }
-            statement.close();
-            connection.close();
-            resultSet.close();
+            close(statement,connection,resultSet);
             return accounts;
         }
     }

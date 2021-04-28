@@ -26,7 +26,7 @@
             </li>
 
             <li class="">
-                <a class="" href="#">
+                <a class="" href="/currencies">
                     <i class="fa fa-money" aria-hidden="true"></i>
                     <span>Валюти</span>
                 </a>

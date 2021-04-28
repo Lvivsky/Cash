@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 
@@ -11,7 +12,7 @@
     <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
     <link rel="shortcut icon" href="resources/img/favicon.png">
 
-    <title>Cash | Categories</title>
+    <title>Cash | Currency</title>
 
     <!-- Bootstrap CSS -->
     <link href="resources/css/bootstrap.min.css" rel="stylesheet">
@@ -46,49 +47,41 @@
 
     <section id="main-content">
         <section class="wrapper">
-            <!--overview start-->
-            <div class="row">
-                <div class="col-lg-12">
-                    <h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>
-                    <ol class="breadcrumb">
-                        <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
-                        <li><i class="fa fa-laptop"></i>Dashboard</li>
-                    </ol>
-                </div>
-            </div>
 
             <div class="row">
-                <div class="col-lg-12">
-                    <section class="panel">
-                        <table class="table table-striped table-advance table-hover">
-                            <tbody>
-                            <tr>
-                                <th><i class="icon_book"></i> Назва категорії</th>
-                                <th><i class="icon_calculator_alt"></i> Примітка</th>
-                                <th><i class="icon_currency"></i> Parent</th>
-                                <th><i class="icon_cogs"></i> Action</th>
-                            </tr>
-                            <c:forEach items="${categories}" var="e">
+
+                    <div class="col-sm-9">
+                        <section class="panel">
+                            <table class="table">
+                                <thead>
                                 <tr>
-                                    <td>${e.name}</td>
-                                    <td>${e.comment}</td>
-                                    <td>${e.parent}</td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a>
-                                            <a class="btn btn-success" href="#"><i class="icon_check_alt2"></i></a>
-                                            <a class="btn btn-danger" href="#"><i class="icon_close_alt2"></i></a>
-                                        </div>
-                                    </td>
+                                    <th>Вибрати</th>
+                                    <th>Код</th>
+                                    <th>Назва</th>
+                                    <th>Дата</th>
                                 </tr>
-                            </c:forEach>
+                                </thead>
+                                <tbody>
+                                <form action="/currency-upload" method="post">
+                                <c:forEach var="e" items="${template_currencies}">
+                                    <tr>
+                                        <td>
+                                            <input name="checksCurr" class="form-check-input" type="checkbox" value="${e.charCode}"/>
+                                        </td>
+                                        <td>${e.charCode}</td>
+                                        <td>${e.name}</td>
+                                        <td>${e.date}</td>
+                                    </tr>
+                                </c:forEach>
+                                    <input type="submit" class="btn btn-default" value="Прийняти">
+                                </form>
+                                </tbody>
+                            </table>
+                        </section>
+                    </div>
 
-                            </tbody>
-                        </table>
-                    </section>
-                </div>
+
             </div>
-
         </section>
     </section>
 
