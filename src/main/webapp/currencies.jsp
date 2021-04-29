@@ -81,19 +81,53 @@
                                             <table class="table table-striped table-advance table-hover">
                                                 <tbody>
                                                 <tr>
+                                                    <th><i class="icon_calculator_alt"></i> Код валюти</th>
                                                     <th><i class="icon_book"></i> Назва валюти</th>
-                                                    <th><i class="icon_calculator_alt"></i> Позначення</th>
                                                     <th><i class="icon_cogs"></i> Action</th>
                                                 </tr>
                                                 <c:forEach items="${curr}" var="e">
                                                     <tr>
-                                                        <td>${e.name}</td>
                                                         <td>${e.code}</td>
+                                                        <td>${e.name}</td>
                                                         <td>
                                                             <div class="btn-group">
-                                                                <a class="btn btn-warning" href="#"><i class="icon_pencil-edit"></i></a>
-                                                                <a class="btn btn-danger" href="#"><i class="icon_close_alt2"></i></a>
+                                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_${e.id}">
+                                                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                                </button>
                                                             </div>
+
+                                                                <!-- Modal -->
+                                                                <div class="modal fade" id="modal_${e.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog" role="document">
+                                                                        <div class="modal-content">
+
+                                                                            <form method="post" action="/currency-edit?currency_id=${e.id}">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title" id="exampleModalLabel">Редагувати валюту - ${e.name}</h5>
+                                                                                </div>
+                                                                                <div class="modal-body">
+
+                                                                                    <label for="account_name" class="form-label">Назва валюти </label>
+                                                                                    <input type="text" class="form-control" minlength="3" maxlength="16" name="name" id="account_name" value="${e.name}"/>
+
+                                                                                    <label for="account_balance" class="form-label">Код валюти </label>
+                                                                                    <input type="text" class="form-control" minlength="3" maxlength="3" name="code" id="account_balance" value="${e.code}"/>
+
+                                                                                </div>
+                                                                                <div class="modal-footer">
+<%--                                                                                    <a type="button" class="btn btn-danger" href="/currency-remove?currency_id=${e.id}"--%>
+<%--                                                                                       onclick="return confirm('Ви дійсно бажаєте видалити цю валюту?')">--%>
+<%--                                                                                        Видалити валюту</a>--%>
+                                                                                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Вийти"/>
+                                                                                    <input type="submit" class="btn btn-info" value="Зберегти"/>
+                                                                                </div>
+                                                                            </form>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+
                                                         </td>
                                                     </tr>
                                                 </c:forEach>
@@ -104,7 +138,9 @@
                                 </div>
 
                                 <div id="currencies-rate" class="tab-pane">
-                                    About
+
+
+
                                 </div>
                             </div>
                         </div>

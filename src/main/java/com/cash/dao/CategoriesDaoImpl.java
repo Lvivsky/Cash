@@ -17,7 +17,7 @@ public class CategoriesDaoImpl implements CategoriesDao {
         try (
                 Connection connection = SqliteConnection.getConnection();
                 Statement statement = connection.createStatement();
-                ResultSet resultSet = statement.executeQuery("SELECT * FROM Categories"))
+                ResultSet resultSet = statement.executeQuery("SELECT * FROM Categories WHERE Deleted=0"))
         {
             while (resultSet.next()) {
                 categories.add(new Categories(
@@ -62,7 +62,7 @@ public class CategoriesDaoImpl implements CategoriesDao {
         try (
                 Connection connection = SqliteConnection.getConnection();
                 PreparedStatement statement = connection.prepareStatement(
-                        "Select * from Categories where Id = ?")
+                        "Select * from Categories where Id = ? and Deleted=0")
                 ){
             statement.setInt(1, id);
             Categories categories = doResultSet(statement);
@@ -77,7 +77,7 @@ public class CategoriesDaoImpl implements CategoriesDao {
         try (
                 Connection connection = SqliteConnection.getConnection();
                 PreparedStatement statement = connection.prepareStatement(
-                        "Select * from Categories where Guid = ?")
+                        "Select * from Categories where Guid = ? and Deleted=0")
         ){
             statement.setString(1, guid);
             Categories categories = doResultSet(statement);
@@ -92,7 +92,7 @@ public class CategoriesDaoImpl implements CategoriesDao {
         try (
                 Connection connection = SqliteConnection.getConnection();
                 PreparedStatement statement = connection.prepareStatement(
-                        "Select * from Categories where Parent = ?")
+                        "Select * from Categories where Parent = ? and Deleted=0")
         ){
             statement.setString(1, parent);
             Categories categories = doResultSet(statement);

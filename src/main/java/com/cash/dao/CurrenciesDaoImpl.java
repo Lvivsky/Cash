@@ -24,7 +24,7 @@ public class CurrenciesDaoImpl implements CurrenciesDao {
                 Connection connection = SqliteConnection.getConnection();
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(
-                        "SELECT * FROM Currencies")
+                        "SELECT * FROM Currencies WHERE Deleted=0")
                 ) {
 
             while (resultSet.next()) {
@@ -49,7 +49,7 @@ public class CurrenciesDaoImpl implements CurrenciesDao {
         try (
                 Connection connection = SqliteConnection.getConnection();
                 PreparedStatement statement = connection.prepareStatement(
-                        "SELECT * FROM Currencies WHERE Code=?")
+                        "SELECT * FROM Currencies WHERE Code=? and Deleted=0")
                 ) {
             statement.setString(1,code);
             return doGetBy(statement);
@@ -61,7 +61,7 @@ public class CurrenciesDaoImpl implements CurrenciesDao {
         try (
                 Connection connection = SqliteConnection.getConnection();
                 PreparedStatement statement = connection.prepareStatement(
-                        "SELECT * FROM Currencies WHERE Id=?")
+                        "SELECT * FROM Currencies WHERE Id=? and Deleted=0")
         ) {
             statement.setInt(1,id);
             return doGetBy(statement);
@@ -105,7 +105,7 @@ public class CurrenciesDaoImpl implements CurrenciesDao {
     }
 
     @Override
-    public void edit(int id, Currencies currencies) throws SQLException, ClassNotFoundException {
+    public void edit(Currencies currencies) throws SQLException, ClassNotFoundException {
         try (
                 Connection connection = SqliteConnection.getConnection();
                 PreparedStatement statement = connection.prepareStatement(
@@ -114,8 +114,8 @@ public class CurrenciesDaoImpl implements CurrenciesDao {
             statement.setString(1,currencies.getName());
             statement.setString(2,currencies.getCode());
             statement.setString(3,currencies.getPrecision());
+            statement.setInt(4,currencies.getId());
             statement.execute();
-            log.info("Edit currency id:"+id+" on" + currencies.toString());
         }
     }
 
@@ -137,7 +137,7 @@ public class CurrenciesDaoImpl implements CurrenciesDao {
         try (
                 Connection connection = SqliteConnection.getConnection();
                 PreparedStatement statement = connection.prepareStatement(
-                        "SELECT 1 FROM Currencies WHERE Code=?")
+                        "SELECT 1 FROM Currencies WHERE Code=? AND Deleted=0")
                 ) {
             statement.setString(1,code);
             ResultSet resultSet = statement.executeQuery();

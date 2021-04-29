@@ -12,5 +12,6 @@ public interface CurrenciesService {
     Currencies getById(int id);
 
     void add(Currencies currencies);
+    void edit(Currencies currencies);
 
 }

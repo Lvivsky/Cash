@@ -25,7 +25,11 @@ public class CurrencyRates {
     private String value1;
     private String value2;
 
-    public CurrencyRates(String rateDate, String currency1, String currency2, String value1, String value2) {
+    public CurrencyRates(String rateDate,
+                         String currency1,
+                         String currency2,
+                         String value1,
+                         String value2) {
         this.id = RandomIdGenerator.getRandomID();
         this.guid = UUID.randomUUID().toString();
         this.changed = String.valueOf(Instant.now().getEpochSecond());

@@ -14,7 +14,7 @@ public class CurrencyRatesDaoImpl implements CurrencyRatesDao {
         try (
                 Connection connection = SqliteConnection.getConnection();
                 PreparedStatement statement = connection.prepareStatement(
-                        "INSERT INTO CurrencyRates (Guid,Changed,Deleted,RateDate,Currency1,Currency2,Value1,Value1) VALUES (?,?,?,?,?,?,?,?)")
+                        "INSERT INTO CurrencyRates (Guid,Changed,Deleted,RateDate,Currency1,Currency2,Value1,Value2) VALUES (?,?,?,?,?,?,?,?)")
                 ) {
             statement.setString(1,currencyRates.getGuid());
             statement.setString(2,currencyRates.getChanged());

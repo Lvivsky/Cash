@@ -73,4 +73,15 @@ public class CurrenciesServiceImpl implements CurrenciesService {
         }
 
     }
+
+    @Override
+    public void edit(Currencies currencies) {
+        try {
+            currenciesDao.edit(currencies);
+        } catch (SQLException e) {
+            log.error("SQLException | " + e.getMessage());
+        } catch (ClassNotFoundException e) {
+            log.error("ClassNotFoundException | " + e.getMessage());
+        }
+    }
 }

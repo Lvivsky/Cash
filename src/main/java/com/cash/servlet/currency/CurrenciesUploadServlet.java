@@ -3,6 +3,7 @@ package com.cash.servlet.currency;
 
 import com.cash.core.CurrencyController;
 import com.cash.model.Currencies;
+import com.cash.model.CurrencyRates;
 import com.cash.service.CurrenciesService;
 import com.cash.service.CurrenciesServiceImpl;
 import com.cash.service.CurrencyRatesService;
@@ -27,11 +28,13 @@ public class CurrenciesUploadServlet extends HttpServlet {
 
     private List<TemplateCurrency> templateCurrencies;
     private CurrenciesService currenciesService;
+    private CurrencyRatesService currencyRatesService;
 
     @Override
     public void init() throws ServletException {
-        templateCurrencies = new ArrayList<>();
+        this.templateCurrencies = new ArrayList<>();
         this.currenciesService = new CurrenciesServiceImpl();
+        this.currencyRatesService = new CurrencyRatesServiceImpl();
     }
 
     @Override
@@ -70,8 +73,37 @@ public class CurrenciesUploadServlet extends HttpServlet {
         currencies.forEach(x -> currenciesService.add(x));
         log.info("Currencies added successfully");
 
+        List<Currencies> currenciesList = currenciesService.getAll();
+        List<CurrencyRates> currencyRatesList = new ArrayList<>();
+
+
+        for (int i = 0; i < res.size(); i++) {
+            for (int j = i+1; j < res.size(); j++) {
+
+                Currencies c1 = currenciesService.getByCode(res.get(i).getCharCode());
+                Currencies c2 = currenciesService.getByCode(res.get(j).getCharCode());
+
+                String value1 = res.get(i).getValue().replace(',','.');
+                String value2 = res.get(j).getValue().replace(',','.');
+
+
+                currencyRatesList.add(
+                        new CurrencyRates(
+                                String.valueOf(Instant.now().getEpochSecond()),
+                                String.valueOf(c1.getId()),
+                                String.valueOf(c2.getId()),
+                                String.valueOf(Math.round(Double.parseDouble(value2) * 10000)),
+                                String.valueOf(Math.round(Double.parseDouble(value1) * res.get(j).getNominal() * 10000))
+                        )
+                );
+            }
+        }
+
+        currencyRatesList.forEach(x -> currencyRatesService.add(x));
+        log.info("Currencies successfully added");
 
         templateCurrencies.clear();
         resp.sendRedirect(req.getContextPath()+"/currencies");
     }
+
 }

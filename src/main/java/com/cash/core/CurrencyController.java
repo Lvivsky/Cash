@@ -49,7 +49,7 @@ public class CurrencyController {
                           node.getString("Value"),
                           node.getString("ID"),
                           node.getInt("Nominal"),
-                          node.getInt("Nominal"),
+                          node.getInt("NumCode"),
                           node.getString("Name"),
                           false
                   ));

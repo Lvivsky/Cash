@@ -13,7 +13,7 @@ public interface CurrenciesDao {
     Currencies getById(int id) throws SQLException, ClassNotFoundException;
 
     void add(Currencies currencies) throws SQLException, ClassNotFoundException;
-    void edit(int id, Currencies currencies) throws SQLException, ClassNotFoundException;
+    void edit(Currencies currencies) throws SQLException, ClassNotFoundException;
     void remove(int id) throws SQLException, ClassNotFoundException;
 
     boolean existByCode(String code) throws SQLException, ClassNotFoundException;
