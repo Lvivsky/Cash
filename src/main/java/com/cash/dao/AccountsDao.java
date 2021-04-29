@@ -15,4 +15,6 @@ public interface AccountsDao {
 
     void edit(Accounts accounts) throws SQLException, ClassNotFoundException;
 
+    void add(Accounts accounts) throws SQLException, ClassNotFoundException;
+
 }

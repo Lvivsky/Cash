@@ -77,4 +77,26 @@ public class AccountsServiceImpl implements AccountsService {
             log.error("ClassNotFoundException | " + e.getMessage());
         }
     }
+
+    @Override
+    public void removeAccounts(int id) {
+        try {
+            accountsDao.deleteAccount(id);
+        } catch (SQLException e) {
+            log.error("SQLException | " + e.getMessage());
+        } catch (ClassNotFoundException e) {
+            log.error("ClassNotFoundException | " + e.getMessage());
+        }
+    }
+
+    @Override
+    public void addAccounts(Accounts accounts) {
+        try {
+            accountsDao.add(accounts);
+        } catch (SQLException e) {
+            log.error("SQLException | " + e.getMessage());
+        } catch (ClassNotFoundException e) {
+            log.error("ClassNotFoundException | " + e.getMessage());
+        }
+    }
 }

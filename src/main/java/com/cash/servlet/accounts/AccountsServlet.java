@@ -38,10 +38,10 @@ public class AccountsServlet extends HttpServlet {
             Currencies currencies = currenciesService.getById(Integer.parseInt(curr.getCurrency()));
             curr.setCurrency(currencies.getCode());
         });
-
         req.setAttribute("accounts", accounts);
 
-        log.info("Get account page");
+        req.setAttribute("currencies", currenciesService.getAll());
+
         req.getRequestDispatcher("account.jsp").forward(req, resp);
     }
 }

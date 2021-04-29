@@ -101,13 +101,35 @@ public class AccountsDaoImpl implements AccountsDao {
         try (
                 Connection connection = SqliteConnection.getConnection();
                 PreparedStatement statement = connection.prepareStatement(
-                        "UPDATE Accounts SET Changed=?, Name=?, StartingBalance=?, Comment=? WHERE Id=?")
+                        "UPDATE Accounts SET Changed=?, Name=?, StartingBalance=?, Comment=?, Currency=? WHERE Id=?")
                 ) {
             statement.setString(1,accounts.getChanged());
             statement.setString(2,accounts.getName());
             statement.setString(3,accounts.getStartingBalance());
             statement.setString(4,accounts.getComment());
-            statement.setInt(5,accounts.getId());
+            statement.setString(5,accounts.getCurrency());
+            statement.setInt(6,accounts.getId());
+            statement.execute();
+        }
+    }
+
+    @Override
+    public void add(Accounts accounts) throws SQLException, ClassNotFoundException {
+        try (
+                Connection connection = SqliteConnection.getConnection();
+                PreparedStatement statement = connection.prepareStatement(
+                        "INSERT INTO Accounts " +
+                                "(Guid,Changed,Deleted,'Name',StartingBalance,Currency,Comment,Locked)" +
+                                "VALUES (?,?,?,?,?,?,?,?)")
+                ) {
+            statement.setString(1,accounts.getGuid());
+            statement.setString(2,accounts.getChanged());
+            statement.setString(3,accounts.getDeleted());
+            statement.setString(4,accounts.getName());
+            statement.setString(5,accounts.getStartingBalance());
+            statement.setString(6,accounts.getCurrency());
+            statement.setString(7,accounts.getComment());
+            statement.setString(8, accounts.getLocked());
             statement.execute();
         }
     }

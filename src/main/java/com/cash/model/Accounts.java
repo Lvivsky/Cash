@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.time.Instant;
 import java.util.UUID;
 
 @Data
@@ -25,21 +26,18 @@ public class Accounts {
     private String locked;
 
     public Accounts(
-            String changed,
-            String deleted,
             String name,
             String startingBalance,
             String currency,
-            String comment,
-            String locked) {
+            String comment) {
         this.id = RandomIdGenerator.getRandomID();
         this.guid = UUID.randomUUID().toString();
-        this.changed = changed;
-        this.deleted = deleted;
+        this.changed = String.valueOf(Instant.now().getEpochSecond());
+        this.deleted = "0";
         this.name = name;
         this.startingBalance = startingBalance;
         this.currency = currency;
         this.comment = comment;
-        this.locked = locked;
+        this.locked = "0";
     }
 }

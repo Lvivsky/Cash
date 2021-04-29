@@ -12,4 +12,8 @@ public interface AccountsService {
     void setLocked(int id, int locked);
 
     void editAccount(Accounts accounts);
+
+    void removeAccounts(int id);
+
+    void addAccounts(Accounts accounts);
 }

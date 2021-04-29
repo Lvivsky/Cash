@@ -34,14 +34,14 @@ public class EditAccountsServlet extends HttpServlet {
         if (!Objects.isNull(accounts)) {
             String name = req.getParameter("name");
             String balance = req.getParameter("balance");
-            String comment = req.getParameter("comment");
 
             accounts.setChanged(String.valueOf(Instant.now().getEpochSecond()));
             if (!name.equals(""))
                 accounts.setName(name);
             if (!balance.equals(""))
                 accounts.setStartingBalance(balance);
-            accounts.setComment(comment);
+            accounts.setComment(req.getParameter("comment"));
+            accounts.setCurrency(req.getParameter("a_currency"));
 
             accountsService.editAccount(accounts);
             log.info("Account was edited");

@@ -47,15 +47,61 @@
     <section id="main-content">
         <section class="wrapper">
 
-
-            <!--overview start-->
             <div class="row">
                 <div class="col-lg-12">
                     <h3 class="page-header"><i class="fa fa-credit-card" aria-hidden="true"></i> Рахунки</h3>
-                    <ol class="breadcrumb">
-                        <li><i class="fa fa-home"></i><a href="/account">Home</a></li>
-                        <li><i class="fa fa-laptop"></i>Dashboard</li>
-                    </ol>
+                    <section class="panel">
+                        <div class="panel-body">
+
+                            <button type="button" class="btn btn-default popovers" data-toggle="modal" data-target="#account-create"
+                                    data-original-title="Створити новий рахунок" data-placement="bottom" data-trigger="hover"
+                                    data-content="Створення нового облікового рахунку">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Додати
+                            </button>
+                            <!-- Modal -->
+                            <div class="modal fade" id="account-create" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+
+                                        <form method="post" action="/accounts-create">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Введіть значення нового рахунку</h5>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                <label for="a_name" class="form-label">Назва рахунку </label>
+                                                <input required type="text" class="form-control" min="3" name="a_name" id="a_name"/>
+
+                                                <label for="a_currency" class="form-label">Валюта </label>
+                                                <select required class="custom-select form-control" id="a_currency" name="a_currency">
+                                                    <c:forEach items="${currencies}" var="currency">
+                                                        <option value="${currency.id}">${currency.code}   ${currency.name}</option>
+                                                    </c:forEach>
+                                                </select>
+
+
+                                                <label for="a_balance" class="form-label">Початковий залишок </label>
+                                                <input required type="number" class="form-control" name="a_balance" id="a_balance" value="0"/>
+
+                                                <label for="a_comment" class="form-label">Примітка </label>
+                                                <input type="text" class="form-control" min="3" name="a_comment" id="a_comment"/>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <input type="button" class="btn btn-default" data-dismiss="modal" value="Вийти"/>
+                                                <input type="submit" class="btn btn-info" value="Зберегти"/>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <a href="#" data-original-title="some"
+                               data-content="Додати власну валюту, для налаштуванняя рейтингу перейдіть у розділ 'Курс валют та введіть потрібні значення відносно інших валют"
+                               data-placement="bottom" data-trigger="hover" class="btn btn-default popovers">новий функціонал</a>
+                        </div>
+                    </section>
                 </div>
             </div>
 
@@ -124,6 +170,13 @@
                                                                 <label for="account_name" class="form-label">Назва рахунку </label>
                                                                 <input type="text" class="form-control" min="3" name="name" id="account_name" value="${e.name}"/>
 
+                                                                <label for="currency" class="form-label">Валюта </label>
+                                                                <select required class="custom-select form-control" id="currency" name="a_currency">
+                                                                    <c:forEach items="${currencies}" var="c_e">
+                                                                        <option value="${c_e.id}">${c_e.code}   ${c_e.name}</option>
+                                                                    </c:forEach>
+                                                                </select>
+
                                                                 <label for="account_balance" class="form-label">Залишок </label>
                                                                 <input type="number" class="form-control" name="balance" id="account_balance" value="${e.startingBalance}"/>
 
@@ -132,7 +185,7 @@
 
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <a type="button" class="btn btn-danger" href="#"
+                                                                <a type="button" class="btn btn-danger" href="/account-remove?account_id=${e.id}"
                                                                    onclick="return confirm('Ви дійсно бажаєте видалити цей рахунок?')">
                                                                     Видалити рахунок</a>
                                                                 <input type="button" class="btn btn-default" data-dismiss="modal" value="Вийти"/>
