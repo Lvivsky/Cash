@@ -53,7 +53,7 @@
                     <section class="panel">
                         <div class="panel-body">
                             <a href="/currency-upload" data-original-title="Завантажити валюту"
-                               data-content="Завантаження даних про валюти із інтернету"
+                               data-content="Завантаження даних про валюти із інтернету" onclick="return confirm('Завантажити валюти із інтернету?')"
                                data-placement="bottom" data-trigger="hover" class="btn btn-default popovers">Завантажити валюту</a>
                             <a href="#" data-original-title="Додати валюту"
                                data-content="Додати власну валюту, для налаштуванняя рейтингу перейдіть у розділ 'Курс валют та введіть потрібні значення відносно інших валют"

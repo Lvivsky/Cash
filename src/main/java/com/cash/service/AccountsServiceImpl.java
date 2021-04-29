@@ -17,7 +17,6 @@ public class AccountsServiceImpl implements AccountsService {
         this.accountsDao = new AccountsDaoImpl();
     }
 
-
     @Override
     public List<Accounts> getAllAccounts() {
         try {
@@ -28,6 +27,54 @@ public class AccountsServiceImpl implements AccountsService {
         } catch (ClassNotFoundException e) {
             log.error("ClassNotFoundException | " + e.getMessage());
             return new ArrayList<>();
+        }
+    }
+
+    @Override
+    public Accounts getAccounts(int id) {
+        try {
+            return accountsDao.getAccounts(id);
+        } catch (SQLException e) {
+            log.error("SQLException | " + e.getMessage());
+            return new Accounts();
+        } catch (ClassNotFoundException e) {
+            log.error("ClassNotFoundException | " + e.getMessage());
+            return new Accounts();
+        }
+    }
+
+    @Override
+    public boolean isLocked(int id) {
+        try {
+            return accountsDao.getAccounts(id).getLocked().equals("1");
+        } catch (SQLException e) {
+            log.error("SQLException | " + e.getMessage());
+            return false;
+        } catch (ClassNotFoundException e) {
+            log.error("ClassNotFoundException | " + e.getMessage());
+            return false;
+        }
+    }
+
+    @Override
+    public void setLocked(int id, int locked) {
+        try {
+            accountsDao.setLocked(id,locked);
+        } catch (SQLException e) {
+            log.error("SQLException | " + e.getMessage());
+        } catch (ClassNotFoundException e) {
+            log.error("ClassNotFoundException | " + e.getMessage());
+        }
+    }
+
+    @Override
+    public void editAccount(Accounts accounts) {
+        try {
+            accountsDao.edit(accounts);
+        } catch (SQLException e) {
+            log.error("SQLException | " + e.getMessage());
+        } catch (ClassNotFoundException e) {
+            log.error("ClassNotFoundException | " + e.getMessage());
         }
     }
 }

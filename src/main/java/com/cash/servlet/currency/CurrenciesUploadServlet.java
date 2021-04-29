@@ -5,6 +5,8 @@ import com.cash.core.CurrencyController;
 import com.cash.model.Currencies;
 import com.cash.service.CurrenciesService;
 import com.cash.service.CurrenciesServiceImpl;
+import com.cash.service.CurrencyRatesService;
+import com.cash.service.CurrencyRatesServiceImpl;
 import com.cash.util.TemplateCurrency;
 import lombok.extern.log4j.Log4j;
 import lombok.var;
@@ -46,13 +48,14 @@ public class CurrenciesUploadServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         List<Currencies> currencies = new ArrayList<>();
-
-
         String[] checksCurr = req.getParameterValues("checksCurr");
 
+
+        List<TemplateCurrency> res = new ArrayList<>();
         for (var e: templateCurrencies) {
             for (int i = 0; i < checksCurr.length; i++) {
                 if (e.getCharCode().equals(checksCurr[i])) {
+                    res.add(e);
                     currencies.add(new Currencies(
                             String.valueOf(Instant.now().getEpochSecond()),
                             "0",
@@ -66,6 +69,7 @@ public class CurrenciesUploadServlet extends HttpServlet {
 
         currencies.forEach(x -> currenciesService.add(x));
         log.info("Currencies added successfully");
+
 
         templateCurrencies.clear();
         resp.sendRedirect(req.getContextPath()+"/currencies");

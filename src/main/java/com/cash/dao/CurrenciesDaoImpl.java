@@ -45,6 +45,48 @@ public class CurrenciesDaoImpl implements CurrenciesDao {
     }
 
     @Override
+    public Currencies getByCode(String code) throws SQLException, ClassNotFoundException {
+        try (
+                Connection connection = SqliteConnection.getConnection();
+                PreparedStatement statement = connection.prepareStatement(
+                        "SELECT * FROM Currencies WHERE Code=?")
+                ) {
+            statement.setString(1,code);
+            return doGetBy(statement);
+        }
+    }
+
+    @Override
+    public Currencies getById(int id) throws SQLException, ClassNotFoundException {
+        try (
+                Connection connection = SqliteConnection.getConnection();
+                PreparedStatement statement = connection.prepareStatement(
+                        "SELECT * FROM Currencies WHERE Id=?")
+        ) {
+            statement.setInt(1,id);
+            return doGetBy(statement);
+        }
+    }
+
+    private static Currencies doGetBy(PreparedStatement statement) throws SQLException {
+        ResultSet resultSet = statement.executeQuery();
+        Currencies currencies = new Currencies();
+        while (resultSet.next()) {
+            currencies.setId(resultSet.getInt("Id"));
+            currencies.setGuid(resultSet.getString("Guid"));
+            currencies.setChanged(resultSet.getString("Changed"));
+            currencies.setDeleted(resultSet.getString("Deleted"));
+            currencies.setCode(resultSet.getString("Code"));
+            currencies.setName(resultSet.getString("Name"));
+            currencies.setPrecision(resultSet.getString("Precision"));
+        }
+        return currencies;
+    }
+
+
+
+
+    @Override
     public void add(Currencies currencies) throws SQLException, ClassNotFoundException {
         try (
                 Connection connection = SqliteConnection.getConnection();

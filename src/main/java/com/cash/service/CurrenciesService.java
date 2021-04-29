@@ -8,6 +8,9 @@ public interface CurrenciesService {
 
     List<Currencies> getAll();
 
+    Currencies getByCode(String code);
+    Currencies getById(int id);
+
     void add(Currencies currencies);
 
 }

@@ -62,7 +62,7 @@ public class CurrencyController {
     }
 
     @SneakyThrows
-    public static String download() {
+    private static String download() {
         URL url = new URL(URL_FILE);
         HttpURLConnection connection =
                 (HttpURLConnection) url.openConnection();

@@ -40,33 +40,15 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-
-//    @Override
-//    public List<User> getAllUsers() throws SQLException, ClassNotFoundException {
-//        List<User> users = new ArrayList<>();
-//        try (
-//                Connection connection = SqliteConnection.getConnection();
-//                Statement statement = connection.createStatement();
-//                ResultSet resultSet = statement.executeQuery("SELECT * FROM Users"))
-//        {
-//            while (resultSet.next())
-//            {
-//                users.add(
-//                        new User(
-//                            resultSet.getInt("Id"),
-//                            resultSet.getString("Guid"),
-//                            resultSet.getString("Changed"),
-//                            resultSet.getString("Deleted"),
-//                            resultSet.getString("Login")
-//                        )
-//                );
-//            }
-//            connection.close();
-//            statement.close();
-//            resultSet.close();
-//            return users;
-//        }
-//    }
-
+    @Override
+    public void editUsername(String username) {
+        try {
+            userDao.editUsername(username);
+        } catch (SQLException e) {
+            log.error("SQLException |" + e.getMessage());
+        } catch (ClassNotFoundException e) {
+            log.error("ClassNotFoundException | " + e.getMessage());
+        }
+    }
 
 }

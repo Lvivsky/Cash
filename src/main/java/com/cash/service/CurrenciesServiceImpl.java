@@ -36,6 +36,32 @@ public class CurrenciesServiceImpl implements CurrenciesService {
     }
 
     @Override
+    public Currencies getByCode(String code) {
+        try {
+            return currenciesDao.getByCode(code);
+        } catch (SQLException e) {
+            log.error("SQLException | " + e.getMessage());
+            return new Currencies();
+        } catch (ClassNotFoundException e) {
+            log.error("ClassNotFoundException | " + e.getMessage());
+            return new Currencies();
+        }
+    }
+
+    @Override
+    public Currencies getById(int id) {
+        try {
+            return currenciesDao.getById(id);
+        } catch (SQLException e) {
+            log.error("SQLException | " + e.getMessage());
+            return new Currencies();
+        } catch (ClassNotFoundException e) {
+            log.error("ClassNotFoundException | " + e.getMessage());
+            return new Currencies();
+        }
+    }
+
+    @Override
     public void add(Currencies currencies) {
         try {
             if (!currenciesDao.existByCode(currencies.getCode()))

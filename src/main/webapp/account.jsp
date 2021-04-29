@@ -51,9 +51,9 @@
             <!--overview start-->
             <div class="row">
                 <div class="col-lg-12">
-                    <h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>
+                    <h3 class="page-header"><i class="fa fa-credit-card" aria-hidden="true"></i> Рахунки</h3>
                     <ol class="breadcrumb">
-                        <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+                        <li><i class="fa fa-home"></i><a href="/account">Home</a></li>
                         <li><i class="fa fa-laptop"></i>Dashboard</li>
                     </ol>
                 </div>
@@ -73,15 +73,77 @@
                             </tr>
                             <c:forEach items="${accounts}" var="e">
                                 <tr>
-                                    <td>${e.name}</td>
+                                    <td>
+                                        <c:if test="${'1'.equals(e.locked)}">
+                                            <i class="fa fa-lock" aria-hidden="true"></i> ${e.name}
+                                        </c:if>
+                                        <c:if test="${'0'.equals(e.locked)}">
+                                            ${e.name}
+                                        </c:if>
+                                    </td>
                                     <td>${e.startingBalance}</td>
                                     <td>${e.currency}</td>
                                     <td>${e.comment}</td>
                                     <td>
                                         <div class="btn-group">
-                                            <a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a>
-                                            <a class="btn btn-success" href="#"><i class="icon_check_alt2"></i></a>
-                                            <a class="btn btn-danger" href="#"><i class="icon_close_alt2"></i></a>
+
+                                            <c:if test="${'1'.equals(e.locked)}">
+                                                <form action="/account-unlock?account_id=${e.id}" method="post">
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_${e.id}">
+                                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                    </button>
+                                                    <button type="submit" class="btn btn-warning"
+                                                            onclick="return confirm('Ви впевнені що хочете розблокувати цей рахунок?')">
+                                                        <i class="fa fa-lock" aria-hidden="true"></i>
+                                                    </button>
+                                                </form>
+                                            </c:if>
+                                            <c:if test="${'0'.equals(e.locked)}">
+                                                <form action="/account-lock?account_id=${e.id}" method="post">
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_${e.id}">
+                                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                    </button>
+                                                    <button type="submit" class="btn btn-warning"
+                                                            onclick="return confirm('Ви впевнені що хочете заблокувати цей рахунок?')">
+                                                        <i class="fa fa-lock" aria-hidden="true"></i>
+                                                    </button>
+                                                </form>
+                                            </c:if>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="modal_${e.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+
+                                                        <form method="post" action="/account-edit?account_id=${e.id}">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Редагувати рахунок - ${e.name}</h5>
+                                                            </div>
+                                                            <div class="modal-body">
+
+                                                                <label for="account_name" class="form-label">Назва рахунку </label>
+                                                                <input type="text" class="form-control" min="3" name="name" id="account_name" value="${e.name}"/>
+
+                                                                <label for="account_balance" class="form-label">Залишок </label>
+                                                                <input type="number" class="form-control" name="balance" id="account_balance" value="${e.startingBalance}"/>
+
+                                                                <label for="account_comment" class="form-label">Примітка </label>
+                                                                <input type="text" class="form-control" min="3" name="comment" id="account_comment" value="${e.comment}"/>
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <a type="button" class="btn btn-danger" href="#"
+                                                                   onclick="return confirm('Ви дійсно бажаєте видалити цей рахунок?')">
+                                                                    Видалити рахунок</a>
+                                                                <input type="button" class="btn btn-default" data-dismiss="modal" value="Вийти"/>
+                                                                <input type="submit" class="btn btn-info" value="Зберегти"/>
+                                                            </div>
+                                                        </form>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </td>
                                 </tr>

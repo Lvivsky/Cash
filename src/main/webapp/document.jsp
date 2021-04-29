@@ -48,9 +48,15 @@
     <section id="main-content">
         <section class="wrapper">
 
-            <div class="row">
+                <form action="/currency-upload" method="post">
+                    <div class="row mb-3">
+                        <div class="col-lg-9">
+                            <input type="submit" class="btn btn-default" value="Прийняти">
+                        </div>
+                    </div>
 
-                    <div class="col-sm-9">
+                    <div class="row">
+                    <div class="col-lg-9">
                         <section class="panel">
                             <table class="table">
                                 <thead>
@@ -62,26 +68,23 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <form action="/currency-upload" method="post">
-                                <c:forEach var="e" items="${template_currencies}">
-                                    <tr>
-                                        <td>
-                                            <input name="checksCurr" class="form-check-input" type="checkbox" value="${e.charCode}"/>
-                                        </td>
-                                        <td>${e.charCode}</td>
-                                        <td>${e.name}</td>
-                                        <td>${e.date}</td>
-                                    </tr>
-                                </c:forEach>
-                                    <input type="submit" class="btn btn-default" value="Прийняти">
-                                </form>
+                                    <c:forEach var="e" items="${template_currencies}">
+                                        <tr>
+                                            <td>
+                                                <input name="checksCurr" class="form-check-input" type="checkbox" value="${e.charCode}"/>
+                                            </td>
+                                            <td>${e.charCode}</td>
+                                            <td>${e.name}</td>
+                                            <td>${e.date}</td>
+                                        </tr>
+                                    </c:forEach>
                                 </tbody>
                             </table>
                         </section>
                     </div>
+                    </div>
+                </form>
 
-
-            </div>
         </section>
     </section>
 

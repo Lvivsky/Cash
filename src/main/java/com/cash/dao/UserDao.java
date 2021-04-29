@@ -8,5 +8,6 @@ public interface UserDao {
 
     User getUser() throws SQLException, ClassNotFoundException;
     void edit(User newUser) throws SQLException, ClassNotFoundException;
+    void editUsername(String username) throws SQLException, ClassNotFoundException;
 
 }

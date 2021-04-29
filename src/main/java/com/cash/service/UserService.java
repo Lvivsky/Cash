@@ -6,5 +6,7 @@ public interface UserService {
 
     User getUser();
     void edit(User newUser);
+    void editUsername(String username);
+
 
 }

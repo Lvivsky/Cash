@@ -42,4 +42,17 @@ public class UserDaoImpl implements UserDao {
         log.info("Edit functional is not finished!");
         // TODO:: UserDaoImpl add edit functional
     }
+
+    @Override
+    public void editUsername(String username) throws SQLException, ClassNotFoundException {
+        try (
+                Connection connection = SqliteConnection.getConnection();
+                PreparedStatement statement = connection.prepareStatement(
+                        "UPDATE Users SET Login=? WHERE Id = 1")
+                ) {
+            statement.setString(1,username);
+            statement.execute();
+            log.info("Username changed successfully");
+        }
+    }
 }

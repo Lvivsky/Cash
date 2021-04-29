@@ -9,6 +9,9 @@ public interface CurrenciesDao {
 
     List<Currencies> getAll() throws SQLException, ClassNotFoundException;
 
+    Currencies getByCode(String code) throws SQLException, ClassNotFoundException;
+    Currencies getById(int id) throws SQLException, ClassNotFoundException;
+
     void add(Currencies currencies) throws SQLException, ClassNotFoundException;
     void edit(int id, Currencies currencies) throws SQLException, ClassNotFoundException;
     void remove(int id) throws SQLException, ClassNotFoundException;
