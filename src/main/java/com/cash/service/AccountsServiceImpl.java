@@ -3,6 +3,7 @@ package com.cash.service;
 import com.cash.dao.AccountsDao;
 import com.cash.dao.AccountsDaoImpl;
 import com.cash.model.Accounts;
+import com.cash.model.Currencies;
 import lombok.extern.log4j.Log4j;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -12,9 +13,11 @@ import java.util.List;
 public class AccountsServiceImpl implements AccountsService {
 
     private final AccountsDao accountsDao;
+    private CurrenciesService currenciesService;
 
     public AccountsServiceImpl() {
         this.accountsDao = new AccountsDaoImpl();
+        currenciesService = new CurrenciesServiceImpl();
     }
 
     @Override
@@ -26,6 +29,24 @@ public class AccountsServiceImpl implements AccountsService {
             return new ArrayList<>();
         } catch (ClassNotFoundException e) {
             log.error("ClassNotFoundException | " + e.getMessage());
+            return new ArrayList<>();
+        }
+    }
+
+    @Override
+    public List<Accounts> getAllAccountsWithCurrencyCode() {
+        try {
+            List<Accounts> acc = accountsDao.getAll();
+            acc.forEach(curr -> {
+                Currencies currencies = currenciesService.getById(Integer.parseInt(curr.getCurrency()));
+                curr.setCurrency(currencies.getCode());
+            });
+            return acc;
+        } catch (SQLException e) {
+            log.error("SQLException | " + e.getMessage());
+            return new ArrayList<>();
+        } catch (ClassNotFoundException e) {
+            log.error("SQLException | " + e.getMessage());
             return new ArrayList<>();
         }
     }

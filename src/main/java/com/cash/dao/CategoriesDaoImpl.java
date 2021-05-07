@@ -37,6 +37,45 @@ public class CategoriesDaoImpl implements CategoriesDao {
         }
     }
 
+    @Override
+    public List<Categories> getParent(Categories categories) throws SQLException, ClassNotFoundException {
+        List<Categories> cat = new ArrayList<>();
+        try (
+                Connection connection = SqliteConnection.getConnection();
+                PreparedStatement statement = connection.prepareStatement(
+                        " WITH RECURSIVE" +
+                        " under_root(Id,Guid,Changed,Deleted,Name,Comment,Parent,level)" +
+                                " AS ( VALUES(?,?,?,?,?,?,?,1) " +
+                                " UNION ALL " +
+                                " SELECT tmpl.Id, tmpl.Guid, tmpl.Changed, tmpl.Deleted, tmpl.Name, tmpl.Comment,tmpl.Parent, level+1 " +
+                                " FROM Categories as tmpl JOIN under_root ON tmpl.Parent=under_root.Id " +
+                                " ORDER BY 2 DESC ) " +
+                        " SELECT * FROM under_root;"
+                ))
+        {
+            statement.setInt(1,categories.getId());
+            statement.setString(2,categories.getGuid());
+            statement.setString(3,categories.getChanged());
+            statement.setString(4,categories.getDeleted());
+            statement.setString(5,categories.getName());
+            statement.setString(6,categories.getComment());
+            statement.setString(7,categories.getParent());
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                cat.add(new Categories(
+                        resultSet.getInt("Id"),
+                        resultSet.getString("Guid"),
+                        resultSet.getString("Changed"),
+                        resultSet.getString("Deleted"),
+                        resultSet.getString("Name"),
+                        resultSet.getString("Comment"),
+                        resultSet.getString("Parent")
+                ));
+            }
+            return cat;
+        }
+    }
+
     private Categories doResultSet(PreparedStatement statement) throws SQLException {
         ResultSet resultSet = statement.executeQuery();
         Categories categories = new Categories();

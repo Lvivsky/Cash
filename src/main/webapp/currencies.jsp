@@ -55,9 +55,9 @@
                             <a href="/currency-upload" data-original-title="Завантажити валюту"
                                data-content="Завантаження даних про валюти із інтернету" onclick="return confirm('Завантажити валюти із інтернету?')"
                                data-placement="bottom" data-trigger="hover" class="btn btn-default popovers">Завантажити валюту</a>
-                            <a href="#" data-original-title="Додати валюту"
-                               data-content="Додати власну валюту, для налаштуванняя рейтингу перейдіть у розділ 'Курс валют та введіть потрібні значення відносно інших валют"
-                               data-placement="bottom" data-trigger="hover" class="btn btn-default popovers">Добавити валюту</a>
+<%--                            <a href="#" data-original-title="Додати валюту"--%>
+<%--                               data-content="Додати власну валюту, для налаштуванняя рейтингу перейдіть у розділ 'Курс валют та введіть потрібні значення відносно інших валют"--%>
+<%--                               data-placement="bottom" data-trigger="hover" class="btn btn-default popovers">Добавити валюту</a>--%>
                         </div>
                     </section>
                 </div>
@@ -78,7 +78,7 @@
 
                                 <div id="currencies" class="tab-pane active">
                                         <section class="panel">
-                                            <table class="table table-striped table-advance table-hover">
+                                            <table class="table table-striped table-advance table-sm table-hover">
                                                 <tbody>
                                                 <tr>
                                                     <th><i class="icon_calculator_alt"></i> Код валюти</th>

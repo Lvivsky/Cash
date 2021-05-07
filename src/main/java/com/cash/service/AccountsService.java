@@ -6,6 +6,7 @@ import java.util.List;
 public interface AccountsService {
 
     List<Accounts> getAllAccounts();
+    List<Accounts> getAllAccountsWithCurrencyCode();
     Accounts getAccounts(int id);
     boolean isLocked(int id);
 

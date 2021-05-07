@@ -8,6 +8,7 @@ import java.util.List;
 public interface CategoriesDao {
 
     List<Categories> getAll() throws SQLException, ClassNotFoundException;
+    List<Categories> getParent(Categories categories) throws SQLException, ClassNotFoundException;
 
     Categories getCategoryById(int id) throws SQLException, ClassNotFoundException;
     Categories getCategoryByGuid(String guid) throws SQLException, ClassNotFoundException;

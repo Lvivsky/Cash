@@ -32,12 +32,8 @@ public class AccountsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
 
-        List<Accounts> accounts = accountsService.getAllAccounts();
+        List<Accounts> accounts = accountsService.getAllAccountsWithCurrencyCode();
 
-        accounts.forEach(curr -> {
-            Currencies currencies = currenciesService.getById(Integer.parseInt(curr.getCurrency()));
-            curr.setCurrency(currencies.getCode());
-        });
         req.setAttribute("accounts", accounts);
 
         req.setAttribute("currencies", currenciesService.getAll());

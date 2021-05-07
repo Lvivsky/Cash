@@ -37,9 +37,9 @@
             </li>
 
             <li class="">
-                <a class="" href="#">
+                <a class="" href="/operation">
                     <i class="icon_desktop"></i>
-                    <span>Дії</span>
+                    <span>Операції</span>
                 </a>
             </li>
 

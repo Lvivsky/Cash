@@ -7,5 +7,6 @@ import java.util.List;
 public interface CategoriesService {
 
     List<Categories> getAll();
+    List<Categories> getAllRecursiveById(int id);
 
 }

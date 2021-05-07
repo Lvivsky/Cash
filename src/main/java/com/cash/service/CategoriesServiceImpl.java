@@ -3,6 +3,7 @@ package com.cash.service;
 import com.cash.dao.CategoriesDao;
 import com.cash.dao.CategoriesDaoImpl;
 import com.cash.model.Categories;
+import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j;
 
 import java.sql.SQLException;
@@ -12,7 +13,7 @@ import java.util.List;
 @Log4j
 public class CategoriesServiceImpl implements CategoriesService {
 
-    private final CategoriesDao categoriesDao;
+    private static CategoriesDao categoriesDao;
 
     public CategoriesServiceImpl() {
         this.categoriesDao = new CategoriesDaoImpl();
@@ -32,5 +33,19 @@ public class CategoriesServiceImpl implements CategoriesService {
             return categories;
         }
 
+    }
+
+    @Override
+    public List<Categories> getAllRecursiveById(int id) {
+        try {
+            Categories c = categoriesDao.getCategoryById(id);
+            return categoriesDao.getParent(c);
+        } catch (SQLException e) {
+            log.error("SQLException | " + e.getMessage());
+            return new ArrayList<>();
+        } catch (ClassNotFoundException e) {
+            log.error("ClassNotFoundException | " + e.getMessage());
+            return new ArrayList<>();
+        }
     }
 }

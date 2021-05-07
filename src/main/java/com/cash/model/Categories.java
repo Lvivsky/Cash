@@ -23,11 +23,11 @@ public class Categories {
     private String comment;
     private String parent;
 
-    public Categories(String changed, String deleted, String name, String comment, String parent) {
+    public Categories(String name, String comment, String parent) {
         this.id = RandomIdGenerator.getRandomID();
         this.guid = UUID.randomUUID().toString();
-        this.changed = changed;
-        this.deleted = deleted;
+        this.changed = "";
+        this.deleted = "0";
         this.name = name;
         this.comment = comment;
         this.parent = parent;
