@@ -61,20 +61,10 @@
                                 <i class="fa fa-minus" aria-hidden="true"></i> Витрата
                             </button>
 
-                            <button type="button" class="btn btn-default popovers" data-toggle="modal" data-target="#operation_income">
+                            <button type="button" class="btn btn-default popovers" data-toggle="modal" data-target="#operation_transfer">
                                 <i class="fa fa-retweet" aria-hidden="true"></i> Переказ
                             </button>
 
-                            <button type="button" class="btn btn-default popovers" data-toggle="modal" data-target="#account-create"
-                                    data-original-title="Створити новий рахунок" data-placement="bottom" data-trigger="hover"
-                                    data-content="Створення нового облікового рахунку">
-                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Додати
-                            </button>
-
-
-                            <a href="#" data-original-title="some"
-                               data-content="Додати власну валюту, для налаштуванняя рейтингу перейдіть у розділ 'Курс валют та введіть потрібні значення відносно інших валют"
-                               data-placement="bottom" data-trigger="hover" class="btn btn-default popovers">новий функціонал</a>
                         </div>
                     </section>
                 </div>
@@ -348,7 +338,80 @@
 </div>
 
 <!-- TRANSFER -->
+<div class="modal fade" id="operation_transfer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
 
+            <form method="post" action="/operation/transfer">
+                <div class="modal-header">
+                    <h5 class="modal-title">Переказ</h5>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group row">
+                        <label for="transfer_outcome_account" class="col-form-label col-sm-2">Із рахунку </label>
+                        <div class="col-sm-10">
+                            <select required class="custom-select form-control" id="transfer_outcome_account" name="transfer_outcome_account">
+                                <c:forEach items="${accounts}" var="_acc1">
+                                    <option value="${_acc1.id}">${_acc1.currency} - ${_acc1.name}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="transfer_income_account" class="col-form-label col-sm-2">На рахунок </label>
+                        <div class="col-sm-10">
+                            <select required class="custom-select form-control" id="transfer_income_account" name="transfer_income_account">
+                                <c:forEach items="${accounts}" var="_acc2">
+                                    <option value="${_acc2.id}">${_acc2.currency} - ${_acc2.name}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="transfer_state" class="col-form-label col-sm-2">Стан операції </label>
+                        <div class="col-sm-10">
+                            <select required class="custom-select form-control" id="transfer_state" name="transfer_state">
+                                <option value="1">Виконана</option>
+                                <option value="2">Виконана і заблокована</option>
+                                <option value="3">Не виконана</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="transfer_date" class="form-label col-sm-2">Дата </label>
+                        <div class="col-sm-10">
+                            <input required type="datetime-local" class="form-control" name="transfer_date" id="transfer_date"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="transfer_balance" class="form-label col-sm-2">Сума витрати </label>
+                        <div class="col-sm-10">
+                            <input required type="number" class="form-control" name="transfer_balance" id="transfer_balance" value="0"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="transfer_comment" class="form-label col-sm-2">Примітка </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" maxlength="100" name="transfer_comment" id="transfer_comment"/>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Вийти"/>
+                    <input type="submit" class="btn btn-info" value="Зберегти"/>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
 
 
 <!-- javascripts -->

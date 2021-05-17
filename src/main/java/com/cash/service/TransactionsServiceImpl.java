@@ -16,7 +16,6 @@ public class TransactionsServiceImpl implements TransactionsService {
     private static TransactionGroupsDao transactionGroupsDao;
     private static TransactionCategoriesDao transactionCategoriesDao;
 
-
     public TransactionsServiceImpl() {
         transactionsDao = new TransactionsDaoImpl();
         transactionGroupsDao = new TransactionGroupsDaoImpl();
@@ -155,6 +154,5 @@ public class TransactionsServiceImpl implements TransactionsService {
             e.printStackTrace();
         }
     }
-
 
 }
