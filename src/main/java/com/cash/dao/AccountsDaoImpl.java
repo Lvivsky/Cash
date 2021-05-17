@@ -46,6 +46,36 @@ public class AccountsDaoImpl implements AccountsDao {
     }
 
     @Override
+    public List<Accounts> getAllNotLocked() throws SQLException, ClassNotFoundException {
+        List<Accounts> accounts = new ArrayList<>();
+        try (
+                Connection connection = SqliteConnection.getConnection();
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(
+                        "SELECT * FROM Accounts WHERE Deleted=0 AND Locked=0")
+        ) {
+            while (resultSet.next())
+            {
+                accounts.add(
+                        new Accounts(
+                                resultSet.getInt("Id"),
+                                resultSet.getString("Guid"),
+                                resultSet.getString("Changed"),
+                                resultSet.getString("Deleted"),
+                                resultSet.getString("Name"),
+                                resultSet.getString("StartingBalance"),
+                                resultSet.getString("Currency"),
+                                resultSet.getString("Comment"),
+                                resultSet.getString("Locked")
+                        )
+                );
+            }
+            close(statement,connection,resultSet);
+            return accounts;
+        }
+    }
+
+    @Override
     public Accounts getAccounts(int id) throws SQLException, ClassNotFoundException {
         try (
                 Connection connection = SqliteConnection.getConnection();

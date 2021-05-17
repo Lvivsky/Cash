@@ -46,7 +46,25 @@ public class AccountsServiceImpl implements AccountsService {
             log.error("SQLException | " + e.getMessage());
             return new ArrayList<>();
         } catch (ClassNotFoundException e) {
+            log.error("ClassNotFoundException | " + e.getMessage());
+            return new ArrayList<>();
+        }
+    }
+
+    @Override
+    public List<Accounts> getAllAccountsWithCurrencyCodeAndNotLocked() {
+        try {
+            List<Accounts> acc = accountsDao.getAllNotLocked();
+            acc.forEach(curr -> {
+                Currencies currencies = currenciesService.getById(Integer.parseInt(curr.getCurrency()));
+                curr.setCurrency(currencies.getCode());
+            });
+            return acc;
+        } catch (SQLException e) {
             log.error("SQLException | " + e.getMessage());
+            return new ArrayList<>();
+        } catch (ClassNotFoundException e) {
+            log.error("ClassNotFoundException | " + e.getMessage());
             return new ArrayList<>();
         }
     }

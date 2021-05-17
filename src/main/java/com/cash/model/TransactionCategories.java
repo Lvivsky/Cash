@@ -1,6 +1,5 @@
 package com.cash.model;
 
-import com.cash.util.RandomIdGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,22 +9,23 @@ import java.time.Instant;
 import java.util.UUID;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
-public class User {
+public class TransactionCategories {
 
-    private Integer id;
+    private int id;
     private String guid;
     private String changed;
     private String deleted;
-    private String login;
+    private String category;
+    private String transaction;
 
-    public User(String deleted, String login) {
-        this.id = RandomIdGenerator.getRandomID();
-        this.guid = UUID.randomUUID().toString();
+    public TransactionCategories(String category, String transaction) {
+        this.guid = String.valueOf(UUID.randomUUID());
         this.changed = String.valueOf(Instant.now().getEpochSecond());
-        this.deleted = deleted;
-        this.login = login;
+        this.deleted = "0";
+        this.category = category;
+        this.transaction = transaction;
     }
 }

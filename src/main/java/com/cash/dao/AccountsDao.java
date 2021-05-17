@@ -8,6 +8,7 @@ import java.util.List;
 public interface AccountsDao {
 
     List<Accounts> getAll() throws SQLException, ClassNotFoundException;
+    List<Accounts> getAllNotLocked() throws SQLException, ClassNotFoundException;
     Accounts getAccounts(int id) throws SQLException, ClassNotFoundException;
 
     void setLocked(int id, int locked) throws SQLException, ClassNotFoundException;

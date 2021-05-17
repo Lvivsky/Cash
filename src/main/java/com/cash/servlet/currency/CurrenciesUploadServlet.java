@@ -60,7 +60,6 @@ public class CurrenciesUploadServlet extends HttpServlet {
                 if (e.getCharCode().equals(checksCurr[i])) {
                     res.add(e);
                     currencies.add(new Currencies(
-                            String.valueOf(Instant.now().getEpochSecond()),
                             "0",
                             e.getCharCode(),
                             e.getName(),

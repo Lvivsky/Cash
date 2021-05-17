@@ -7,6 +7,7 @@ public interface AccountsService {
 
     List<Accounts> getAllAccounts();
     List<Accounts> getAllAccountsWithCurrencyCode();
+    List<Accounts> getAllAccountsWithCurrencyCodeAndNotLocked();
     Accounts getAccounts(int id);
     boolean isLocked(int id);
 

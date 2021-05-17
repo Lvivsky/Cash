@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.time.Instant;
 import java.util.UUID;
 
 @Data
@@ -26,7 +27,7 @@ public class Categories {
     public Categories(String name, String comment, String parent) {
         this.id = RandomIdGenerator.getRandomID();
         this.guid = UUID.randomUUID().toString();
-        this.changed = "";
+        this.changed = String.valueOf(Instant.now().getEpochSecond());
         this.deleted = "0";
         this.name = name;
         this.comment = comment;

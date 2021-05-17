@@ -1,39 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="base2" uuid="fcd2e82f-b6b4-47c0-b6b1-5154c107c465">
-      <driver-ref>sqlite.xerial</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/db/base2.cash</jdbc-url>
-      <libraries>
-        <library>
-          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/Xerial SQLiteJDBC/3.34.0/sqlite-jdbc-3.34.0.jar</url>
-        </library>
-      </libraries>
-    </data-source>
-    <data-source source="LOCAL" name="template" uuid="673b069f-6927-4e67-9233-28717b8803bf">
-      <driver-ref>sqlite.xerial</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/db/template.cash</jdbc-url>
-      <libraries>
-        <library>
-          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/Xerial SQLiteJDBC/3.34.0/sqlite-jdbc-3.34.0.jar</url>
-        </library>
-      </libraries>
-    </data-source>
-    <data-source source="LOCAL" name="temp" uuid="531f74e3-e942-402e-83a2-063d16ce02a1">
-      <driver-ref>sqlite.xerial</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/db/temp.cash</jdbc-url>
-      <libraries>
-        <library>
-          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/Xerial SQLiteJDBC/3.34.0/sqlite-jdbc-3.34.0.jar</url>
-        </library>
-      </libraries>
-    </data-source>
     <data-source source="LOCAL" name="temp [2]" uuid="7d68135d-dc56-4a2e-87d6-da9671685db6">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
@@ -45,7 +12,7 @@
         </library>
       </libraries>
     </data-source>
-    <data-source source="LOCAL" name="temp [3]" uuid="3b20c0bf-79d4-4bcd-b624-85073f8a05d4">
+    <data-source source="LOCAL" name="temp" uuid="bb75d6ed-cdd0-4e5b-b9b7-19b6cd1a3667">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
@@ -56,18 +23,18 @@
         </library>
       </libraries>
     </data-source>
-    <data-source source="LOCAL" name="base2 [2]" uuid="73d9f2ad-f4e8-4da6-aad6-a337f692069f">
+    <data-source source="LOCAL" name="temp [3]" uuid="eaadf510-5712-4f3e-8314-998c930cdc1a">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/db/base2.cash</jdbc-url>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/db/temp.cash</jdbc-url>
       <libraries>
         <library>
           <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/Xerial SQLiteJDBC/3.34.0/sqlite-jdbc-3.34.0.jar</url>
         </library>
       </libraries>
     </data-source>
-    <data-source source="LOCAL" name="temp [4]" uuid="e63a971f-daf8-440d-bc46-6ecc09eaf850">
+    <data-source source="LOCAL" name="temp [4]" uuid="bab4132e-51eb-4781-9b6c-fb7667704c07">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>

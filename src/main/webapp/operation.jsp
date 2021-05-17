@@ -200,37 +200,66 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
 
-            <form method="post" action="#">
+            <form method="post" action="/operation/income">
                 <div class="modal-header">
                     <h5 class="modal-title">Прихід</h5>
                 </div>
                 <div class="modal-body">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <label for="income_accounts" class="form-label col-lg-3">Рахунок </label>
+
+                    <div class="form-group row">
+                        <label for="income_accounts" class="col-form-label col-sm-2">Рахунок </label>
+                        <div class="col-sm-10">
                             <select required class="custom-select form-control" id="income_accounts" name="income_accounts">
                                 <c:forEach items="${accounts}" var="acc">
-                                    <option>${acc.currency} - ${acc.name}</option>
+                                    <option value="${acc.id}">${acc.currency} - ${acc.name}</option>
                                 </c:forEach>
                             </select>
+                        </div>
+                    </div>
 
-                            <label for="income_date" class="form-label col-lg-3">Дата </label>
+                    <div class="form-group row">
+                        <label for="income_state" class="col-form-label col-sm-2">Стан операції </label>
+                        <div class="col-sm-10">
+                            <select required class="custom-select form-control" id="income_state" name="income_state">
+                                <option value="1">Виконана</option>
+                                <option value="2">Виконана і заблокована</option>
+                                <option value="3">Не виконана</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="income_date" class="form-label col-sm-2">Дата </label>
+                        <div class="col-sm-10">
                             <input required type="datetime-local" class="form-control" name="income_date" id="income_date"/>
+                        </div>
+                    </div>
 
-                            <label for="income_category" class="form-label col-lg-3">Стаття доходу</label>
+                    <div class="form-group row">
+                        <label for="income_category" class="form-label col-sm-2">Стаття доходу </label>
+                        <div class="col-sm-10">
                             <select required class="custom-select form-control" id="income_category" name="income_category">
                                 <c:forEach items="${operations_income}" var="_income">
-                                    <option>${_income.name}</option>
+                                    <option value="${_income.id}">${_income.name}</option>
                                 </c:forEach>
                             </select>
+                        </div>
+                    </div>
 
-                            <label for="income_balance" class="form-label col-lg-3">Сума доходу </label>
+                    <div class="form-group row">
+                        <label for="income_balance" class="form-label col-sm-2">Сума доходу </label>
+                        <div class="col-sm-10">
                             <input required type="number" class="form-control" name="income_balance" id="income_balance" value="0"/>
+                        </div>
+                    </div>
 
-                            <label for="income_comment" class="form-label col-lg-3">Примітка </label>
+                    <div class="form-group row">
+                        <label for="income_comment" class="form-label col-sm-2">Примітка </label>
+                        <div class="col-sm-10">
                             <input type="text" class="form-control" maxlength="100" name="income_comment" id="income_comment"/>
                         </div>
                     </div>
+
                 </div>
                 <div class="modal-footer">
                     <input type="button" class="btn btn-default" data-dismiss="modal" value="Вийти"/>
@@ -247,37 +276,66 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
 
-            <form method="post" action="#">
+            <form method="post" action="/operation/expense">
                 <div class="modal-header">
                     <h5 class="modal-title">Витрата</h5>
                 </div>
                 <div class="modal-body">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <label for="outcome_accounts" class="form-label col-lg-3">Рахунок </label>
+
+                    <div class="form-group row">
+                        <label for="outcome_accounts" class="col-form-label col-sm-2">Рахунок </label>
+                        <div class="col-sm-10">
                             <select required class="custom-select form-control" id="outcome_accounts" name="outcome_accounts">
-                                <c:forEach items="${accounts}" var="acc">
-                                    <option>${acc.currency} - ${acc.name}</option>
+                                <c:forEach items="${accounts}" var="_acc">
+                                    <option value="${_acc.id}">${_acc.currency} - ${_acc.name}</option>
                                 </c:forEach>
                             </select>
+                        </div>
+                    </div>
 
-                            <label for="outcome_date" class="form-label col-lg-3">Дата </label>
+                    <div class="form-group row">
+                        <label for="outcome_state" class="col-form-label col-sm-2">Стан операції </label>
+                        <div class="col-sm-10">
+                            <select required class="custom-select form-control" id="outcome_state" name="outcome_state">
+                                <option value="1">Виконана</option>
+                                <option value="2">Виконана і заблокована</option>
+                                <option value="3">Не виконана</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="outcome_date" class="form-label col-sm-2">Дата </label>
+                        <div class="col-sm-10">
                             <input required type="datetime-local" class="form-control" name="outcome_date" id="outcome_date"/>
+                        </div>
+                    </div>
 
-                            <label for="outcome_category" class="form-label col-lg-3">Стаття витрати</label>
+                    <div class="form-group row">
+                        <label for="outcome_category" class="form-label col-sm-2">Стаття доходу </label>
+                        <div class="col-sm-10">
                             <select required class="custom-select form-control" id="outcome_category" name="outcome_category">
-                                <c:forEach items="${operations_outcome}" var="_income">
-                                    <option>${_income.name}</option>
+                                <c:forEach items="${operations_income}" var="_outcome">
+                                    <option value="${_outcome.id}">${_outcome.name}</option>
                                 </c:forEach>
                             </select>
+                        </div>
+                    </div>
 
-                            <label for="outcome_balance" class="form-label col-lg-3">Сума витрати </label>
+                    <div class="form-group row">
+                        <label for="outcome_balance" class="form-label col-sm-2">Сума витрати </label>
+                        <div class="col-sm-10">
                             <input required type="number" class="form-control" name="outcome_balance" id="outcome_balance" value="0"/>
+                        </div>
+                    </div>
 
-                            <label for="outcome_comment" class="form-label col-lg-3">Примітка </label>
+                    <div class="form-group row">
+                        <label for="outcome_comment" class="form-label col-sm-2">Примітка </label>
+                        <div class="col-sm-10">
                             <input type="text" class="form-control" maxlength="100" name="outcome_comment" id="outcome_comment"/>
                         </div>
                     </div>
+
                 </div>
                 <div class="modal-footer">
                     <input type="button" class="btn btn-default" data-dismiss="modal" value="Вийти"/>
@@ -288,6 +346,7 @@
         </div>
     </div>
 </div>
+
 <!-- TRANSFER -->
 
 

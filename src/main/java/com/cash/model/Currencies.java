@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.time.Instant;
 import java.util.UUID;
 
 @Data
@@ -22,10 +23,10 @@ public class Currencies {
     private String name;
     private String precision;
 
-    public Currencies(String changed, String deleted, String code, String name, String precision) {
+    public Currencies(String deleted, String code, String name, String precision) {
         this.id = RandomIdGenerator.getRandomID();
         this.guid = UUID.randomUUID().toString();
-        this.changed = changed;
+        this.changed = String.valueOf(Instant.now().getEpochSecond());
         this.deleted = deleted;
         this.code = code;
         this.name = name;
