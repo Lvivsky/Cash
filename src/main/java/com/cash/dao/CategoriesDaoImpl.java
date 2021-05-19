@@ -101,12 +101,23 @@ public class CategoriesDaoImpl implements CategoriesDao {
         try (
                 Connection connection = SqliteConnection.getConnection();
                 PreparedStatement statement = connection.prepareStatement(
-                        "Select * from Categories where Id = ? and Deleted=0")
+                        "Select * from Categories where Id = ? and Deleted not like '1'")
                 ){
             statement.setInt(1, id);
-            Categories categories = doResultSet(statement);
-
-            close(statement,connection);
+            ResultSet resultSet = statement.executeQuery();
+            Categories categories = null;
+            while (resultSet.next()) {
+                categories = new Categories(
+                        resultSet.getInt("Id"),
+                        resultSet.getString("Guid"),
+                        resultSet.getString("Changed"),
+                        resultSet.getString("Deleted"),
+                        resultSet.getString("Name"),
+                        resultSet.getString("Comment"),
+                        resultSet.getString("Parent")
+                );
+            }
+            resultSet.close();
             return categories;
         }
     }

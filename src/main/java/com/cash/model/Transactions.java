@@ -66,7 +66,4 @@ public class Transactions {
         this.extraComment4 = "";
         this.budgetPeriodEnd = String.valueOf(Instant.now().getEpochSecond());
     }
-
-
-
 }

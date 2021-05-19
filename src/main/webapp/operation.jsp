@@ -70,6 +70,156 @@
                 </div>
             </div>
 
+            <div class="row">
+                <div class="col-lg-12">
+                    <section class="panel">
+                        <div class="panel-body">
+
+                            <div class="form-group row">
+                                <label for="select_filter" class="popovers col-sm-2">По рахунку </label>
+                                <div class="col-sm-3">
+                                    <select required onchange="selected_filter(event)" class="custom-select popovers form-control" id="select_filter" name="select_filter">
+                                        <option value="-1">none</option>
+                                        <c:forEach items="${accounts}" var="ac">
+                                            <c:if test="${param.filter_id == ac.id}">
+                                                <option value="${ac.id}" selected>${ac.name}</option>
+                                            </c:if>
+                                            <c:if test="${param.filter_id != ac.id}">
+                                                <option value="${ac.id}">${ac.name}</option>
+                                            </c:if>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="select_filter_state_income" class="popovers col-sm-2"> Стаття </label>
+                                <div class="col-sm-3">
+                                    <select required onchange="selected_state(event)" class="custom-select popovers form-control" id="select_filter_state_income" name="select_filter_state_income">
+                                        <option value="-1">none</option>
+                                        <optgroup data-value="income" label="Статті доходів">
+                                            <c:forEach items="${operations_income}" var="oi">
+                                                <c:if test="${param.income == oi.id}">
+                                                    <option value="${oi.id}" selected>${oi.name}</option>
+                                                </c:if>
+                                                <c:if test="${param.income != oi.id}">
+                                                    <option value="${oi.id}">${oi.name}</option>
+                                                </c:if>
+                                            </c:forEach>
+                                        </optgroup>
+                                        <optgroup data-value="outcome" label="Статті витрат">
+                                            <c:forEach items="${operations_outcome}" var="oo">
+                                                <c:if test="${param.outcome == oo.id}">
+                                                    <option value="${oo.id}" selected>${oo.name}</option>
+                                                </c:if>
+                                                <c:if test="${param.outcome != oo.id}">
+                                                    <option value="${oo.id}">${oo.name}</option>
+                                                </c:if>
+                                            </c:forEach>
+                                        </optgroup>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <%-- FILTER SCRIPT --%>
+            <script>
+                function selected_filter(e) {
+                    let selIndex = e.target.options.selectedIndex;
+                    let sel = e.target.options[selIndex].value;
+                    let searchParam = new URLSearchParams(window.location.search)
+
+                    searchParam.set('filter_id', sel);
+                    window.history.replaceState({}, '', '?'+searchParam);
+                    window.location.reload();
+                }
+
+                function selected_state(e) {
+                    let selIndex = e.target.options.selectedIndex;
+                    let sel = e.target.options[selIndex];
+                    let groupName = sel.parentNode.dataset.value;
+
+                    console.log(groupName);
+
+                    let search = window.location.search;
+                    let searchParam = new URLSearchParams(search)
+
+                    if (groupName == undefined) {
+                        searchParam.delete('income');
+                        searchParam.delete('outcome');
+                    }
+
+                    if (!searchParam.has('income') && !searchParam.has('outcome') && groupName == 'income') {
+                        searchParam.set('income',sel.value);
+                    }
+                    if (!searchParam.has('income') && !searchParam.has('outcome') && groupName == 'outcome') {
+                        searchParam.set('outcome',sel.value);
+                    }
+
+                    if (searchParam.has('income') && groupName == 'outcome') {
+                        searchParam.delete('income');
+                        searchParam.set('outcome', sel.value);
+                    }
+                    if (searchParam.has('outcome') && groupName == 'income') {
+                        searchParam.delete('outcome');
+                        searchParam.set('income', sel.value);
+                    }
+
+                    if (searchParam.has('income') && groupName == 'income') {
+                        searchParam.set('income',sel.value)
+                    }
+
+                    if (searchParam.has('outcome') && groupName == 'outcome') {
+                        searchParam.set('outcome',sel.value)
+                    }
+                    window.history.replaceState({}, '', '?'+searchParam);
+                    window.location.reload();
+                }
+            </script>
+
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <section class="panel">
+
+                        <table class="table table-striped table-advance table-hover">
+                            <tbody>
+                            <tr>
+                                <th><i class="icon_book"></i> Дата</th>
+                                <th><i class="icon_calculator_alt"></i> Сума</th>
+                                <th><i class="icon_currency"></i> На рахунку</th>
+                                <th><i class="icon_cogs"></i> Стаття</th>
+                                <th><i class="icon_cogs"></i> Примітка</th>
+                            </tr>
+                            <c:forEach items="${filter_account}" var="e">
+                                <tr>
+                                    <td>${e.changed}</td>
+
+                                    <c:if test="${empty e.incomeAmount}">
+                                        <td>${e.expenseAmount}</td>
+                                        <td>${e.expenseBalance}</td>
+                                    </c:if>
+                                    <c:if test="${empty e.expenseAmount}">
+                                        <td>${e.incomeAmount}</td>
+                                        <td>${e.incomeBalance}</td>
+                                    </c:if>
+
+                                    <td>${e.extraComment1}</td>
+                                    <td>${e.comment}</td>
+                                </tr>
+                            </c:forEach>
+
+                            </tbody>
+                        </table>
+
+                    </section>
+                </div>
+            </div>
+
+
 <%--            <div class="row">--%>
 <%--                <div class="col-lg-12">--%>
 <%--                    <section class="panel">--%>
@@ -180,9 +330,6 @@
 </section>
 
 </div>
-
-
-
 
 
 <!-- INCOME / Прихід -->

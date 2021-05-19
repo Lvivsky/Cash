@@ -2,6 +2,7 @@ package com.cash.dao;
 
 import com.cash.model.Accounts;
 import com.cash.core.SqliteConnection;
+import com.cash.model.Transactions;
 
 import java.sql.*;
 import java.util.ArrayList;

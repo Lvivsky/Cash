@@ -2,6 +2,7 @@ package com.cash.service;
 
 import com.cash.dao.*;
 import com.cash.model.*;
+import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j;
 import java.sql.SQLException;
 import java.time.Instant;
@@ -13,6 +14,7 @@ public class TransactionsServiceImpl implements TransactionsService {
 
     private static TransactionsDao transactionsDao;
     private static AccountsDao accountsDao;
+    private static CategoriesDao categoriesDao;
     private static TransactionGroupsDao transactionGroupsDao;
     private static TransactionCategoriesDao transactionCategoriesDao;
 
@@ -20,6 +22,7 @@ public class TransactionsServiceImpl implements TransactionsService {
         transactionsDao = new TransactionsDaoImpl();
         transactionGroupsDao = new TransactionGroupsDaoImpl();
         accountsDao = new AccountsDaoImpl();
+        categoriesDao = new CategoriesDaoImpl();
         transactionCategoriesDao = new TransactionCategoriesDaoImpl();
     }
 
@@ -123,7 +126,9 @@ public class TransactionsServiceImpl implements TransactionsService {
 
             // Balance
             transactions.setExpenseAccount(accountId);
-            transactions.setExpenseAmount("-".concat(String.valueOf(fixedBalance)));
+            if (fixedBalance < 0)
+                transactions.setExpenseAmount(String.valueOf(fixedBalance));
+            else transactions.setExpenseAmount("-".concat(String.valueOf(fixedBalance)));
             transactions.setExpenseBalance(String.valueOf(resultBalance));
 
             if (operationState.equals("1")) {
@@ -152,6 +157,114 @@ public class TransactionsServiceImpl implements TransactionsService {
         } catch (ClassNotFoundException e) {
             log.error("ClassNotFoundException | " + e.getMessage());
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public List<Transactions> getTransactionsIncomeAccount(int id) {
+        try {
+            List<Transactions> transactions = transactionsDao.getByIncomeAccount(id);
+            for (Transactions t: transactions) {
+                Accounts accounts = accountsDao.getAccounts(Integer.parseInt(t.getIncomeAccount()));
+                if (accounts.getDeleted().equals("1")) {
+                    transactions.remove(t);
+                } else {
+                    t.setIncomeAccount(accounts.getName());
+                }
+            }
+            return transactions;
+        } catch (SQLException e) {
+            log.error("SQLException | " + e.getMessage());
+            e.printStackTrace();
+            return new ArrayList<>();
+        } catch (ClassNotFoundException e) {
+            log.error("ClassNotFoundException | " + e.getMessage());
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+    @Override
+    public List<Transactions> getTransactionsExpanseAccount(int id) {
+        try {
+            List<Transactions> transactions = transactionsDao.getByExpenseAccount(id);
+            for (Transactions t: transactions) {
+                Accounts accounts = accountsDao.getAccounts(Integer.parseInt(t.getIncomeAccount()));
+                if (accounts.getDeleted().equals("1")) {
+                    transactions.remove(t);
+                } else {
+                    t.setIncomeAccount(accounts.getName());
+                }
+            }
+            return transactions;
+        } catch (SQLException e) {
+            log.error("SQLException | " + e.getMessage());
+            e.printStackTrace();
+            return new ArrayList<>();
+        } catch (ClassNotFoundException e) {
+            log.error("ClassNotFoundException | " + e.getMessage());
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+    @Override
+    public List<Transactions> getByIncomeAccount(String accId) {
+        try {
+            List<Transactions> transactions = transactionsDao.getByIncomeAccount(Integer.parseInt(accId));
+            for (Transactions t: transactions) {
+                TransactionCategories tc = transactionCategoriesDao.getByTransactionId(String.valueOf(t.getId()));
+                Categories categories = categoriesDao.getCategoryById(Integer.parseInt(tc.getCategory()));
+
+                t.setIncomeAmount(String.valueOf(
+                        Math.round(Float.parseFloat(t.getIncomeAmount())/Float.parseFloat(t.getQuantity()))
+                ));
+
+                t.setIncomeBalance(String.valueOf(
+                        Math.round(Float.parseFloat(t.getIncomeBalance())/ Float.parseFloat(t.getQuantity()))
+                ));
+                t.setExtraComment1(categories.getName());
+            }
+            return transactions;
+        } catch (SQLException e) {
+            log.error("SQLException | " + e.getMessage());
+            e.printStackTrace();
+            return new ArrayList<>();
+        } catch (ClassNotFoundException e) {
+            log.error("ClassNotFoundException | " + e.getMessage());
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+    @Override
+    public List<Transactions> getByExpanseAccount(String accId) {
+        try {
+//            // TODO :: here
+            List<Transactions> transactions = transactionsDao.getByExpenseAccount(Integer.parseInt(accId));
+            for (Transactions t: transactions) {
+                log.info("T : : : " + t.toString());
+                TransactionCategories tc = transactionCategoriesDao.getByTransactionId(String.valueOf(t.getId()));
+                Categories categories = categoriesDao.getCategoryById(Integer.parseInt(tc.getCategory()));
+
+                t.setExpenseAmount(String.valueOf(
+                        Math.round(Float.parseFloat(t.getExpenseAmount())/Float.parseFloat(t.getQuantity()))
+                ));
+
+                t.setExpenseBalance(String.valueOf(
+                        Math.round(Float.parseFloat(t.getExpenseBalance())/ Float.parseFloat(t.getQuantity()))
+                ));
+                t.setExtraComment1(categories.getName());
+            }
+            return transactions;
+        } catch (SQLException e) {
+            log.error("SQLException | " + e.getMessage());
+            e.printStackTrace();
+            return new ArrayList<>();
+        } catch (ClassNotFoundException e) {
+            log.error("ClassNotFoundException | " + e.getMessage());
+            e.printStackTrace();
+            return new ArrayList<>();
         }
     }
 

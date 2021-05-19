@@ -11,4 +11,12 @@ public interface TransactionsService {
     void addIncomeTransaction(String accountId, String operationState, String date, String categoryId, String balance, String comment);
     void addOutcomeTransaction(String accountId, String operationState, String date, String categoryId, String balance, String comment);
 
+
+    List<Transactions> getTransactionsIncomeAccount(int id);
+    List<Transactions> getTransactionsExpanseAccount(int id);
+
+
+    List<Transactions> getByIncomeAccount(String accId);
+    List<Transactions> getByExpanseAccount(String accId);
+
 }

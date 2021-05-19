@@ -106,7 +106,7 @@ public class TransactionsDaoImpl implements TransactionsDao {
         try (
                 Connection connection = SqliteConnection.getConnection();
                 PreparedStatement statement = connection.prepareStatement(
-                        "SELECT * from Transactions WHERE Id=?")
+                        "SELECT * from Transactions WHERE Id=? AND Deleted not like '1'")
                 ) {
             statement.setInt(1,id);
             ResultSet resultSet = statement.executeQuery();
@@ -141,17 +141,18 @@ public class TransactionsDaoImpl implements TransactionsDao {
     }
 
     @Override
-    public Transactions getByIncomeAccount(int id) throws SQLException, ClassNotFoundException {
+    public List<Transactions> getByIncomeAccount(int id) throws SQLException, ClassNotFoundException {
+        List<Transactions> transactionsList = new ArrayList<>();
         try (
                 Connection connection = SqliteConnection.getConnection();
                 PreparedStatement statement = connection.prepareStatement(
                         "SELECT * from Transactions WHERE IncomeAccount like ?")
         ) {
             statement.setString(1,String.valueOf(id));
+
             ResultSet resultSet = statement.executeQuery();
-            Transactions transactions = null;
             while (resultSet.next()) {
-                transactions = new Transactions(
+                transactionsList.add(new Transactions(
                         resultSet.getInt("Id"),
                         resultSet.getString("Guid"),
                         resultSet.getString("Changed"),
@@ -173,14 +174,15 @@ public class TransactionsDaoImpl implements TransactionsDao {
                         resultSet.getString("ExtraComment2"),
                         resultSet.getString("ExtraComment3"),
                         resultSet.getString("ExtraComment4"),
-                        resultSet.getString("BudgetPeriodEnd"));
+                        resultSet.getString("BudgetPeriodEnd")));
             }
-            return transactions;
+            return transactionsList;
         }
     }
 
     @Override
-    public Transactions getByExpenseAccount(int id) throws SQLException, ClassNotFoundException {
+    public List<Transactions> getByExpenseAccount(int id) throws SQLException, ClassNotFoundException {
+        List<Transactions> transactionsList = new ArrayList<>();
         try (
                 Connection connection = SqliteConnection.getConnection();
                 PreparedStatement statement = connection.prepareStatement(
@@ -188,9 +190,8 @@ public class TransactionsDaoImpl implements TransactionsDao {
         ) {
             statement.setString(1,String.valueOf(id));
             ResultSet resultSet = statement.executeQuery();
-            Transactions transactions = null;
             while (resultSet.next()) {
-                transactions = new Transactions(
+                transactionsList.add( new Transactions(
                         resultSet.getInt("Id"),
                         resultSet.getString("Guid"),
                         resultSet.getString("Changed"),
@@ -212,9 +213,9 @@ public class TransactionsDaoImpl implements TransactionsDao {
                         resultSet.getString("ExtraComment2"),
                         resultSet.getString("ExtraComment3"),
                         resultSet.getString("ExtraComment4"),
-                        resultSet.getString("BudgetPeriodEnd"));
+                        resultSet.getString("BudgetPeriodEnd")));
             }
-            return transactions;
+            return transactionsList;
         }
     }
 
@@ -223,11 +224,12 @@ public class TransactionsDaoImpl implements TransactionsDao {
         try (
                 Connection connection = SqliteConnection.getConnection();
                 PreparedStatement statement = connection.prepareStatement(
-                        "SELECT Id FROM Transactions WHERE Guid like ?")
+                        "SELECT Id FROM Transactions WHERE Guid like ? AND Deleted not like '1'")
                 ) {
             statement.setString(1, guid);
             ResultSet resultSet = statement.executeQuery();
             return resultSet.getInt("Id");
         }
     }
+
 }

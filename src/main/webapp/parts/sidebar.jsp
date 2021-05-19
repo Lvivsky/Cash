@@ -49,19 +49,6 @@
                     <span>Валюти</span>
                 </a>
             </li>
-
-            <li class="">
-                <a class="" href="#">
-                    <i class="icon_documents_alt"></i>
-                    <span>Класифікатори</span>
-                </a>
-            </li>
-            <li class="">
-                <a class="" href="#">
-                    <i class="icon_documents_alt"></i>
-                    <span>Бюджет</span>
-                </a>
-            </li>
             <li class="">
                 <a class="" href="/categories">
                     <i class="fa fa-list-alt" aria-hidden="true"></i>

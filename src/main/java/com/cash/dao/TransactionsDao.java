@@ -13,9 +13,8 @@ public interface TransactionsDao {
     void remove(int id) throws SQLException, ClassNotFoundException;
 
     Transactions getById(int id) throws SQLException, ClassNotFoundException;
-    Transactions getByIncomeAccount(int id) throws SQLException, ClassNotFoundException;
-    Transactions getByExpenseAccount(int id) throws SQLException, ClassNotFoundException;
+    List<Transactions> getByIncomeAccount(int id) throws SQLException, ClassNotFoundException;
+    List<Transactions> getByExpenseAccount(int id) throws SQLException, ClassNotFoundException;
 
     int getIdByGuid(String guid) throws SQLException, ClassNotFoundException;
-
 }

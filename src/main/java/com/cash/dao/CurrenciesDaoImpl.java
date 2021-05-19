@@ -24,7 +24,7 @@ public class CurrenciesDaoImpl implements CurrenciesDao {
                 Connection connection = SqliteConnection.getConnection();
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(
-                        "SELECT * FROM Currencies WHERE Deleted=0")
+                        "SELECT * FROM Currencies WHERE Deleted not like '1'")
                 ) {
 
             while (resultSet.next()) {
@@ -49,7 +49,7 @@ public class CurrenciesDaoImpl implements CurrenciesDao {
         try (
                 Connection connection = SqliteConnection.getConnection();
                 PreparedStatement statement = connection.prepareStatement(
-                        "SELECT * FROM Currencies WHERE Code=? and Deleted=0")
+                        "SELECT * FROM Currencies WHERE Code=? and Deleted not like '1'")
                 ) {
             statement.setString(1,code);
             return doGetBy(statement);
@@ -61,7 +61,7 @@ public class CurrenciesDaoImpl implements CurrenciesDao {
         try (
                 Connection connection = SqliteConnection.getConnection();
                 PreparedStatement statement = connection.prepareStatement(
-                        "SELECT * FROM Currencies WHERE Id=? and Deleted=0")
+                        "SELECT * FROM Currencies WHERE Id=? and Deleted not like '1'")
         ) {
             statement.setInt(1,id);
             return doGetBy(statement);
@@ -137,7 +137,7 @@ public class CurrenciesDaoImpl implements CurrenciesDao {
         try (
                 Connection connection = SqliteConnection.getConnection();
                 PreparedStatement statement = connection.prepareStatement(
-                        "SELECT 1 FROM Currencies WHERE Code=? AND Deleted=0")
+                        "SELECT 1 FROM Currencies WHERE Code=? and Deleted not like '1'")
                 ) {
             statement.setString(1,code);
             ResultSet resultSet = statement.executeQuery();

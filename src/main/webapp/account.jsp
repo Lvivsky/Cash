@@ -97,9 +97,9 @@
                                 </div>
                             </div>
 
-                            <a href="#" data-original-title="some"
-                               data-content="Додати власну валюту, для налаштуванняя рейтингу перейдіть у розділ 'Курс валют та введіть потрібні значення відносно інших валют"
-                               data-placement="bottom" data-trigger="hover" class="btn btn-default popovers">новий функціонал</a>
+<%--                            <a href="#" data-original-title="some"--%>
+<%--                               data-content="Додати власну валюту, для налаштуванняя рейтингу перейдіть у розділ 'Курс валют та введіть потрібні значення відносно інших валют"--%>
+<%--                               data-placement="bottom" data-trigger="hover" class="btn btn-default popovers">новий функціонал</a>--%>
                         </div>
                     </section>
                 </div>
