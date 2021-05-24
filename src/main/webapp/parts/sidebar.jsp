@@ -27,7 +27,7 @@
                 </li>
 
             <li class="active">
-                <a class="" href="#">
+                <a class="" href="/report">
                     <i class="fa fa-bar-chart" aria-hidden="true"></i>
                     <span>Статистика</span>
                 </a>
