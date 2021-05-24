@@ -19,4 +19,8 @@ public interface TransactionsService {
     List<Transactions> getByIncomeAccount(String accId);
     List<Transactions> getByExpanseAccount(String accId);
 
+
+    List<Transactions> getByIncomeAccountAndStateRecursive(String accId, String stateId);
+    List<Transactions> getByExpenseAccountAndStateRecursive(String accId, String stateId);
+
 }

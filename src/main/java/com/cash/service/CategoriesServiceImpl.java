@@ -48,4 +48,26 @@ public class CategoriesServiceImpl implements CategoriesService {
             return new ArrayList<>();
         }
     }
+
+    @Override
+    public void add(Categories categories) {
+        try {
+            categoriesDao.add(categories);
+        } catch (SQLException e) {
+            log.error("SQLException | " + e.getMessage());
+        } catch (ClassNotFoundException e) {
+            log.error("ClassNotFoundException | " + e.getMessage());
+        }
+    }
+
+    @Override
+    public void edit(Categories categories) {
+        try {
+            categoriesDao.edit(categories);
+        } catch (SQLException e) {
+            log.error("SQLException | " + e.getMessage());
+        } catch (ClassNotFoundException e) {
+            log.error("ClassNotFoundException | " + e.getMessage());
+        }
+    }
 }

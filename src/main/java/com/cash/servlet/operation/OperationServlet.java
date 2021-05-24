@@ -62,14 +62,8 @@ public class OperationServlet extends HttpServlet {
 
         if (filterId != null && !filterId.equals("-1")) {
             if (income == null && outcome == null) {
-                List<Transactions> tt = transactionsService.getByIncomeAccount(filterId);
-                List<Transactions> ttt = transactionsService.getByExpanseAccount(filterId);
-
-                transactionsList.addAll(tt);
-                transactionsList.addAll(ttt);
-
-                tt.forEach(transactions -> log.info(" --- " + transactions.toString()));
-                ttt.forEach(transactions -> log.info(" --- " + transactions.toString()));
+                transactionsList.addAll(transactionsService.getByIncomeAccount(filterId));
+                transactionsList.addAll(transactionsService.getByExpanseAccount(filterId));
             }
             if (income != null && outcome == null) {
 

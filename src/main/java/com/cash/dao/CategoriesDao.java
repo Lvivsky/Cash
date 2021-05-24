@@ -15,7 +15,7 @@ public interface CategoriesDao {
     Categories getCategoryByParent(String parent) throws SQLException, ClassNotFoundException;
 
     void add(Categories category) throws SQLException, ClassNotFoundException;
-    void edit(int id, Categories category) throws SQLException, ClassNotFoundException;
+    void edit(Categories category) throws SQLException, ClassNotFoundException;
     void edit(String guid, Categories category) throws SQLException, ClassNotFoundException;
 
     void editComment(int id, String comment) throws SQLException, ClassNotFoundException;

@@ -49,11 +49,7 @@
             <!--overview start-->
             <div class="row">
                 <div class="col-lg-12">
-                    <h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>
-                    <ol class="breadcrumb">
-                        <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
-                        <li><i class="fa fa-laptop"></i>Dashboard</li>
-                    </ol>
+                    <h3 class="page-header"><i class="fa fa-list-alt" aria-hidden="true"></i> Статті</h3>
                 </div>
             </div>
 
@@ -65,19 +61,84 @@
                             <tr>
                                 <th><i class="icon_book"></i> Назва категорії</th>
                                 <th><i class="icon_calculator_alt"></i> Примітка</th>
-                                <th><i class="icon_currency"></i> Parent</th>
-                                <th><i class="icon_cogs"></i> Action</th>
+                                <th><i class="icon_cogs"></i> </th>
                             </tr>
                             <c:forEach items="${categories}" var="e">
                                 <tr>
                                     <td>${e.name}</td>
                                     <td>${e.comment}</td>
-                                    <td>${e.parent}</td>
                                     <td>
                                         <div class="btn-group">
-                                            <a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a>
-                                            <a class="btn btn-success" href="#"><i class="icon_check_alt2"></i></a>
+                                            <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#category_add_${e.id}"><i class="icon_plus_alt2"></i></a>
+                                            <a class="btn btn-warning" href="#" data-toggle="modal" data-target="#category_edit_${e.id}"><i class="icon_pencil-edit"></i></a>
                                             <a class="btn btn-danger" href="#"><i class="icon_close_alt2"></i></a>
+
+
+                                            <div class="modal fade" id="category_add_${e.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+
+                                                        <form method="post" action="/categories/add?category_id=${e.id}">
+                                                            <div class="modal-header"><h5 class="modal-title">Додати статтю до - ${e.name}</h5></div>
+                                                            <div class="modal-body">
+
+                                                                <div class="form-group row">
+                                                                    <label for="add_name" class="form-label col-sm-2">Назва статті </label>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="text" required minlength="3" class="form-control" maxlength="100" name="add_name" id="add_name"/>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group row">
+                                                                    <label for="add_comment" class="form-label col-sm-2">Примітка </label>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="text" class="form-control" maxlength="100" name="add_comment" id="add_comment"/>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <input type="button" class="btn btn-default" data-dismiss="modal" value="Вийти"/>
+                                                                <input type="submit" class="btn btn-info" value="Зберегти"/>
+                                                            </div>
+                                                        </form>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal fade" id="category_edit_${e.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+
+                                                        <form method="post" action="/categories/edit?category_id=${e.id}">
+                                                            <div class="modal-header"><h5 class="modal-title">Змінити статтю - ${e.name}</h5></div>
+                                                            <div class="modal-body">
+
+                                                                <div class="form-group row">
+                                                                    <label for="edit_name" class="form-label col-sm-2">Назва статті </label>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="text" value="${e.name}" required minlength="3" class="form-control" maxlength="100" name="edit_name" id="edit_name"/>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group row">
+                                                                    <label for="edit_comment" class="form-label col-sm-2">Примітка </label>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="text" class="form-control" maxlength="100" name="edit_comment" id="edit_comment" value="${e.comment}"/>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <input type="button" class="btn btn-default" data-dismiss="modal" value="Вийти"/>
+                                                                <input type="submit" class="btn btn-info" value="Зберегти"/>
+                                                            </div>
+                                                        </form>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </td>
                                 </tr>
@@ -95,6 +156,9 @@
 </section>
 
 </div>
+
+
+
 
 <!-- javascripts -->
 <script src="resources/js/jquery.js"></script>

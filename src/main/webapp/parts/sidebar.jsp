@@ -12,7 +12,11 @@
                         <span class="menu-arrow arrow_carrot-right"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="/save"><i class="icon_folder_download"> Завантажити</i></a></li>
+                        <li>
+                            <a class="" href="/save">
+                                <i class="icon_folder_download"> Завантажити</i>
+                            </a>
+                        </li>
                         <li>
                             <a class="" href="/remove-db"
                                onclick="return confirm('Ви дійсно бажаєте вийти?')">

@@ -2,7 +2,6 @@ package com.cash.service;
 
 import com.cash.dao.*;
 import com.cash.model.*;
-import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j;
 import java.sql.SQLException;
 import java.time.Instant;
@@ -215,7 +214,6 @@ public class TransactionsServiceImpl implements TransactionsService {
             for (Transactions t: transactions) {
                 TransactionCategories tc = transactionCategoriesDao.getByTransactionId(String.valueOf(t.getId()));
                 Categories categories = categoriesDao.getCategoryById(Integer.parseInt(tc.getCategory()));
-
                 t.setIncomeAmount(String.valueOf(
                         Math.round(Float.parseFloat(t.getIncomeAmount())/Float.parseFloat(t.getQuantity()))
                 ));
@@ -240,15 +238,15 @@ public class TransactionsServiceImpl implements TransactionsService {
     @Override
     public List<Transactions> getByExpanseAccount(String accId) {
         try {
-//            // TODO :: here
             List<Transactions> transactions = transactionsDao.getByExpenseAccount(Integer.parseInt(accId));
             for (Transactions t: transactions) {
-                log.info("T : : : " + t.toString());
                 TransactionCategories tc = transactionCategoriesDao.getByTransactionId(String.valueOf(t.getId()));
                 Categories categories = categoriesDao.getCategoryById(Integer.parseInt(tc.getCategory()));
 
-                t.setExpenseAmount(String.valueOf(
-                        Math.round(Float.parseFloat(t.getExpenseAmount())/Float.parseFloat(t.getQuantity()))
+                t.setExpenseAmount(
+                        String.valueOf(
+                            Math.round(
+                                Float.parseFloat(t.getExpenseAmount())/Float.parseFloat(t.getQuantity()))
                 ));
 
                 t.setExpenseBalance(String.valueOf(
@@ -266,6 +264,16 @@ public class TransactionsServiceImpl implements TransactionsService {
             e.printStackTrace();
             return new ArrayList<>();
         }
+    }
+
+    @Override
+    public List<Transactions> getByIncomeAccountAndStateRecursive(String accId, String stateId) {
+        return null;
+    }
+
+    @Override
+    public List<Transactions> getByExpenseAccountAndStateRecursive(String accId, String stateId) {
+        return null;
     }
 
 }

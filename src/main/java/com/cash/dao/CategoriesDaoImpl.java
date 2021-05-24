@@ -17,7 +17,7 @@ public class CategoriesDaoImpl implements CategoriesDao {
         try (
                 Connection connection = SqliteConnection.getConnection();
                 Statement statement = connection.createStatement();
-                ResultSet resultSet = statement.executeQuery("SELECT * FROM Categories WHERE Deleted=0"))
+                ResultSet resultSet = statement.executeQuery("SELECT * FROM Categories WHERE Deleted not like '1'"))
         {
             while (resultSet.next()) {
                 categories.add(new Categories(
@@ -142,7 +142,7 @@ public class CategoriesDaoImpl implements CategoriesDao {
         try (
                 Connection connection = SqliteConnection.getConnection();
                 PreparedStatement statement = connection.prepareStatement(
-                        "Select * from Categories where Parent = ? and Deleted=0")
+                        "Select * from Categories where Parent = ? and Deleted not like '1'")
         ){
             statement.setString(1, parent);
             Categories categories = doResultSet(statement);
@@ -157,22 +157,21 @@ public class CategoriesDaoImpl implements CategoriesDao {
         try (
                 Connection connection = SqliteConnection.getConnection();
                 PreparedStatement statement = connection.prepareStatement(
-                        "INSERT INTO Categories values (?,?,?,?,?,?,?)")
+                        "INSERT INTO Categories (Guid,Changed,Deleted,Name,Comment,Parent) values (?,?,?,?,?,?)")
                 ) {
-            statement.setInt(1, category.getId());
-            statement.setString(2,category.getGuid());
-            statement.setString(3,category.getChanged());
-            statement.setString(4,category.getDeleted());
-            statement.setString(5,category.getName());
-            statement.setString(6,category.getComment());
-            statement.setString(7,category.getParent());
+            statement.setString(1,category.getGuid());
+            statement.setString(2,category.getChanged());
+            statement.setString(3,category.getDeleted());
+            statement.setString(4,category.getName());
+            statement.setString(5,category.getComment());
+            statement.setString(6,category.getParent());
             statement.execute();
             close(statement,connection);
         }
     }
 
     @Override
-    public void edit(int id, Categories category) throws SQLException, ClassNotFoundException {
+    public void edit(Categories category) throws SQLException, ClassNotFoundException {
         try (
                 Connection connection = SqliteConnection.getConnection();
                 PreparedStatement statement = connection.prepareStatement(
@@ -181,7 +180,7 @@ public class CategoriesDaoImpl implements CategoriesDao {
             statement.setString(1,category.getName());
             statement.setString(2,category.getComment());
             statement.setString(3,category.getParent());
-            statement.setInt(4, id);
+            statement.setInt(4, category.getId());
             statement.execute();
             close(statement,connection);
         }
